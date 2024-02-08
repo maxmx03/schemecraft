@@ -1,0 +1,51 @@
+name: "dracula"
+author: "maxmx03"
+default_config:
+  transparent: false
+  on_colors: nil
+  on_highlights: nil
+  modules:
+    treesitter: false
+palette:
+  base:
+    base0: "#f8f8f2"
+    base01: "#6272a4"
+    base02: "#21222c"
+    base03: "#252a36"
+  accent:
+    yellow: "#f1fa8c"
+    cyan: "#8be9fd"
+    green: "#50fa7b"
+    red: "#ff5555"
+    orange: "#ffb86c"
+    pink: "#ff79c6"
+    purple: "#bd93f9"
+  diagnostic:
+    info: "#8be9fd"
+    hint: "#8be9fd"
+    success: "#50fa7b"
+    warning: "#ffb86c"
+    error: "#ff5555"
+  git:
+    added: "#50fa7b"
+    modified: "#ffb86c"
+    removed: "#ff5555"
+highlights:
+  editor:
+    - name: Normal
+      settings:
+        fg: base0
+        bg: base03
+  syntax_groups:
+    - name: Comment
+      settings:
+        fg: base01
+    - name: Constant
+      settings:
+        fg: purple
+  modules:
+    treesitter:
+      - name: "@operator"
+        settings:
+          fg: base01
+          bg: base03
