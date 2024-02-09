@@ -1,5 +1,5 @@
 from src.file_manager import Filemanager
-from src.templates.neovim import init, config, palette, colors, docker
+from src.templates.neovim import init, config, palette, colors, color, docker
 from src.templates.neovim.highlights import (
     init as highlights_init,
     editor,
@@ -61,6 +61,12 @@ class Neovim:
             content=get_content(env=env, source=palette.template, colorscheme=self),
         )
         file_manager.create_file(
+            f"lua/{self.name}/color.lua",
+            content=get_content(
+                env=env, source=color.template, colorscheme=self
+            ),
+        )
+        file_manager.create_file(
             f"lua/{self.name}/highlights/init.lua",
             content=get_content(
                 env=env, source=highlights_init.template, colorscheme=self
@@ -83,14 +89,14 @@ class Neovim:
             content=get_content(
                 env=env, source=docker.dockerfile_template, colorscheme=self
             ),
-            format=False
+            format=False,
         )
         file_manager.create_file(
             f"compose.yml",
             content=get_content(
                 env=env, source=docker.compose_template, colorscheme=self
             ),
-            format=False
+            format=False,
         )
         file_manager.create_file(
             f"tests/colorscheme_spec.lua",

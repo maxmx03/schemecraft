@@ -7,10 +7,11 @@ local M = {}
 M.load = function(opts)
  local hl = opts.hl
  local colors = opts.colors
+ local modules = opts.config.modules
 
 {% for key, value in colorscheme.highlights.modules.items() %}
 
-    if opts.config.modules["{{ key }}"] then
+    if modules["{{ key }}"] then
         {% for subkey, subvalue in value.items() %}
             hl("{{ subkey }}",
                 {

@@ -8,7 +8,7 @@ default_config:
   on_colors: nil
   on_highlights: nil
   modules:
-    treesitter: false
+    treesitter: true
 palette:
   base0: "#f8f8f2"
   base01: "#6272a4"
@@ -39,8 +39,13 @@ highlights:
   syntax:
     Comment:
       fg: base01
+      bg: base03
     Constant:
       fg: purple
+      italic: true
+      bold: true
+    Variable:
+      link: "Constant"
   modules:
     treesitter:
       "@variable.parameter":

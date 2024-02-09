@@ -1,4 +1,6 @@
 from src.neovim import Neovim
+from src.vim9 import Vim9
+
 
 def main():
     import sys
@@ -22,8 +24,19 @@ def main():
         default_config=yaml_content["default_config"],
         highlights=yaml_content["highlights"],
     )
+    vim9 = Vim9(
+        name=yaml_content["name"],
+        author=yaml_content["author"],
+        contact=yaml_content["contact"],
+        repo=yaml_content["repo"],
+        license=yaml_content["license"],
+        palette=yaml_content["palette"],
+        default_config=yaml_content["default_config"],
+        highlights=yaml_content["highlights"],
+    )
 
     neovim.create_colorscheme()
+    vim9.create_colorscheme()
 
     print("Colorscheme was generated with success")
 
