@@ -1,8 +1,8 @@
 import yaml
 from jinja2 import Template
-import subprocess
 import sys
 import os
+import subprocess
 from templates.palette import palette_template
 from templates.config import config_template
 from templates.init import init_template
@@ -24,6 +24,11 @@ class Colorscheme:
         self.highlights = highlights
 
 
+def format_file(path):
+    command = f"stylua {path} -f ./stylua.toml"
+    subprocess.run(command, shell=True)
+
+
 def create_folder(folder_path):
     try:
         os.makedirs("build/" + folder_path)
@@ -36,15 +41,10 @@ def create_file(file_path, content=""):
     try:
         with open("build/" + file_path, "w") as file:
             file.write(content)
+        format_file("build/" + file_path)
         print(f"File '{file_path}' created successfully.")
     except Exception as e:
         print(f"Error creating file '{file_path}': {e}")
-
-
-def run_commands(commands):
-    for command in commands:
-        process = subprocess.Popen(command, shell=True)
-        process.wait()
 
 
 def main():
@@ -70,15 +70,21 @@ def main():
     colors_code = Template(
         colors_template, trim_blocks=True, lstrip_blocks=True
     ).render(colorscheme=colorscheme)
+
     editor_code = Template(
         editor_template, trim_blocks=True, lstrip_blocks=True
     ).render(colorscheme=colorscheme)
+
     palette_code = Template(
         palette_template, trim_blocks=True, lstrip_blocks=True
     ).render(colorscheme=colorscheme)
+
     config_code = Template(
-        config_template, trim_blocks=True, lstrip_blocks=True
+        config_template,
+        trim_blocks=True,
+        lstrip_blocks=True,
     ).render(colorscheme=colorscheme)
+
     init_code = Template(init_template, trim_blocks=True, lstrip_blocks=True).render(
         colorscheme=colorscheme
     )
@@ -94,11 +100,8 @@ def main():
     create_file(f"lua/{colorscheme.name}/palette.lua", palette_code)
     create_file(f"lua/{colorscheme.name}/highlights/editor.lua", editor_code)
 
-    print("Plugin Neovim gerado com sucesso em 'colorscheme.lua'")
+    print("Colorscheme was generated with success")
 
 
 if __name__ == "__main__":
     main()
-    commands = []
-    commands.append("stylua . -f ./stylua.toml")
-    run_commands(commands)

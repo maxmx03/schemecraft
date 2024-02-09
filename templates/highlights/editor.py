@@ -2,9 +2,13 @@ editor_template = """
 local True = true
 local False = false
 
-return {
+local M = {}
+
+M.load = function(opts)
+ local hl = opts.hl
+
 {% for key, value in colorscheme.highlights.editor.items() %}
-        {{ key }} =
+        hl("{{ key }}",
         {% if value is mapping %}
             {
             {% for subkey, subvalue in value.items() %}
@@ -21,7 +25,9 @@ return {
             }
         {% else %}
             {{ value }}
-        {% endif %},
+        {% endif %})
     {% endfor %}
-}
+end
+
+return M
 """
