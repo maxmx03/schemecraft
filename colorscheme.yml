@@ -36,13 +36,17 @@ highlights:
       bg: base03
     NormalNC:
       link: "Normal"
-  syntax_groups:
+  syntax:
     Comment:
       fg: base01
     Constant:
       fg: purple
   modules:
     treesitter:
-      "@operator":
+      "@variable.parameter":
+        fg: orange
+      "@comment":
         fg: base01
-        bg: base03
+    tree:
+       directory:
+         fg: green

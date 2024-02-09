@@ -8,11 +8,21 @@ from templates.config import config_template
 from templates.init import init_template
 from templates.colors import colors_template
 from templates.highlights.editor import editor_template
+from templates.highlights.syntax import syntax_template
+from templates.highlights.modules import modules_template
 
 
 class Colorscheme:
     def __init__(
-        self, name, author, repo, contact, license, palette, default_config, highlights
+        self,
+        name,
+        author,
+        repo,
+        contact,
+        license,
+        palette,
+        default_config,
+        highlights,
     ):
         self.name = name
         self.author = author
@@ -71,6 +81,14 @@ def main():
         colors_template, trim_blocks=True, lstrip_blocks=True
     ).render(colorscheme=colorscheme)
 
+    modules_code = Template(
+        modules_template, trim_blocks=True, lstrip_blocks=True
+    ).render(colorscheme=colorscheme)
+
+    syntax_code = Template(
+        syntax_template, trim_blocks=True, lstrip_blocks=True
+    ).render(colorscheme=colorscheme)
+
     editor_code = Template(
         editor_template, trim_blocks=True, lstrip_blocks=True
     ).render(colorscheme=colorscheme)
@@ -89,16 +107,15 @@ def main():
         colorscheme=colorscheme
     )
 
-    create_folder("lua")
     create_folder("colors")
-    create_folder(f"lua/{colorscheme.name}")
     create_folder(f"lua/{colorscheme.name}/highlights")
-    create_folder(f"lua/{colorscheme.name}/highlights/modules")
     create_file(f"colors/{colorscheme.name}.lua", colors_code)
     create_file(f"lua/{colorscheme.name}/init.lua", init_code)
     create_file(f"lua/{colorscheme.name}/config.lua", config_code)
     create_file(f"lua/{colorscheme.name}/palette.lua", palette_code)
     create_file(f"lua/{colorscheme.name}/highlights/editor.lua", editor_code)
+    create_file(f"lua/{colorscheme.name}/highlights/editor.lua", syntax_code)
+    create_file(f"lua/{colorscheme.name}/highlights/modules.lua", modules_code)
 
     print("Colorscheme was generated with success")
 
