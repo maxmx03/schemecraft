@@ -1,4 +1,4 @@
-init_template="""
+template = """
 local config = require('{{ colorscheme.name }}.config')
 local colors = require('{{ colorscheme.name }}.palette')
 local color = require('{{ colorscheme.name }}.color')

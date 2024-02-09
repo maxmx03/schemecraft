@@ -1,4 +1,4 @@
-colors_template="""
+template = """
 -- {{ colorscheme.name }} colorscheme
 -- Repo: {{ colorscheme.repo }}
 -- Maintainer: {{ colorscheme.author }} <"{{ colorscheme.contact }}">

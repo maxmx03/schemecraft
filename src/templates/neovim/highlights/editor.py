@@ -1,4 +1,4 @@
-editor_template = """
+template = """
 local True = true
 local False = false
 
@@ -6,6 +6,7 @@ local M = {}
 
 M.load = function(opts)
  local hl = opts.hl
+ local colors = opts.colors
 
 {% for key, value in colorscheme.highlights.editor.items() %}
         hl("{{ key }}",
@@ -14,7 +15,7 @@ M.load = function(opts)
             {% for subkey, subvalue in value.items() %}
                 {% if subkey is defined and subvalue is defined %}
                     {% if subvalue is string and colorscheme.palette[subvalue] %}
-                        {{ subkey }} = "{{ colorscheme.palette[subvalue] }}",
+                        {{ subkey }} = colors.{{ subvalue }},
                     {% elif subvalue is string %}
                         {{ subkey }} = "{{ subvalue }}",
                     {% else %}

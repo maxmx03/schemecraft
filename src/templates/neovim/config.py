@@ -1,4 +1,4 @@
-config_template = """
+template = """
 local True = true
 local False = false
 
