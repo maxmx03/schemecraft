@@ -1,18 +1,21 @@
 config_template = """
+local True = true
+local False = false
+
 return {
-    {%- for key, value in colorscheme.default_config.items() -%}
+    {% for key, value in colorscheme.default_config.items() %}
         {{ key }} =
-        {%- if value is mapping -%}
+        {% if value is mapping %}
             {
-            {%- for subkey, subvalue in value.items() -%}
-                {%- if subkey is defined and subvalue is defined -%}
-                    {{ subkey }} = '{{ subvalue }}',
-                {%- endif -%}
-            {%- endfor -%}
+            {% for subkey, subvalue in value.items() %}
+                {% if subkey is defined and subvalue is defined %}
+                    {{ subkey }} = {{ subvalue }},
+                {% endif %}
+            {% endfor %}
             }
-        {%- else -%}
-            '{{ value }}'
-        {%- endif -%},
-    {%- endfor -%}
+        {% else %}
+            {{ value }}
+        {% endif %},
+    {% endfor %}
 }
 """

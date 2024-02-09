@@ -1,5 +1,8 @@
-name: "dracula"
-author: "maxmx03"
+name: dracula
+author: Max Del Canto
+repo: github.com/maxmx03/dracula.nvim
+contact: ""
+license: "MIT License"
 default_config:
   transparent: false
   on_colors: nil
@@ -7,45 +10,39 @@ default_config:
   modules:
     treesitter: false
 palette:
-  base:
-    base0: "#f8f8f2"
-    base01: "#6272a4"
-    base02: "#21222c"
-    base03: "#252a36"
-  accent:
-    yellow: "#f1fa8c"
-    cyan: "#8be9fd"
-    green: "#50fa7b"
-    red: "#ff5555"
-    orange: "#ffb86c"
-    pink: "#ff79c6"
-    purple: "#bd93f9"
-  diagnostic:
-    info: "#8be9fd"
-    hint: "#8be9fd"
-    success: "#50fa7b"
-    warning: "#ffb86c"
-    error: "#ff5555"
-  git:
-    added: "#50fa7b"
-    modified: "#ffb86c"
-    removed: "#ff5555"
+  base0: "#f8f8f2"
+  base01: "#6272a4"
+  base02: "#21222c"
+  base03: "#252a36"
+  yellow: "#f1fa8c"
+  cyan: "#8be9fd"
+  green: "#50fa7b"
+  red: "#ff5555"
+  orange: "#ffb86c"
+  pink: "#ff79c6"
+  purple: "#bd93f9"
+  diag_info: "#8be9fd"
+  diag_hint: "#8be9fd"
+  diag_success: "#50fa7b"
+  diag_warning: "#ffb86c"
+  diag_error: "#ff5555"
+  git_added: "#50fa7b"
+  git_modified: "#ffb86c"
+  git_removed: "#ff5555"
 highlights:
   editor:
-    - name: Normal
-      settings:
-        fg: base0
-        bg: base03
+    Normal:
+      fg: base0
+      bg: base03
+    NormalNC:
+      link: "Normal"
   syntax_groups:
-    - name: Comment
-      settings:
-        fg: base01
-    - name: Constant
-      settings:
-        fg: purple
+    Comment:
+      fg: base01
+    Constant:
+      fg: purple
   modules:
     treesitter:
-      - name: "@operator"
-        settings:
-          fg: base01
-          bg: base03
+      "@operator":
+        fg: base01
+        bg: base03

@@ -1,16 +1,9 @@
 init_template="""
----@class {{ colorscheme.name }}
----@field config {{ colorscheme.name }}.config
----@field colors {{ colorscheme.name }}.colors
----@field setup fun(opts: {{ colorscheme.name }}.config)
----@field load fun()
-
 local config = require('{{ colorscheme.name }}.config')
 local colors = require('{{ colorscheme.name }}.palette')
 local color = require('{{ colorscheme.name }}.color')
 local highlights = require('{{ colorscheme.name }}.highlights')
 
----@type {{ colorscheme.name }}
 local M = {}
 
 M.config = vim.deepcopy(config)

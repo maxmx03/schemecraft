@@ -1,15 +1,8 @@
----@class dracula
----@field config dracula.config
----@field colors dracula.colors
----@field setup fun(opts: dracula.config)
----@field load fun()
-
 local config = require('dracula.config')
 local colors = require('dracula.palette')
 local color = require('dracula.color')
 local highlights = require('dracula.highlights')
 
----@type dracula
 local M = {}
 
 M.config = vim.deepcopy(config)
