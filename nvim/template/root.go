@@ -93,30 +93,10 @@ CONFIGURATION                                 *{{lower .Name}}.nvim-{{lower .Nam
     local {{lower .Name}} = require '{{.Name}}'
     {{lower .Name}}.setup {
         transparent = false,
-        modules = {
-          treesitter = true,
-          semantic = true,
-          tree = true,
-          telescope = true,
-          lsp = true,
-          diagnostic = true,
-          gitsign = true,
-          dashboard = true,
-          cmp = true,
-          navic = true,
-          noice = true,
-          bufferline = true,
-          hop = true,
-          illuminate = true,
-          lazy = true,
-          mini = true,
-          neogit = true,
-          neotree = true,
-          notify = true,
-          saga = true,
-          whichkey = true,
-          todo = true,
-          blankline = true,
+        plugins = {
+	{{range $index, $value := .Config.Plugins -}}
+	{{"  "}}["{{$index}}"] = {{default true $value}},
+	{{end -}}
         },
         on_colors = function(colors, color)
             return {}
