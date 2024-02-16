@@ -1,6 +1,6 @@
-package nvim
+package template
 
-func configTemplate() string {
+func Config() string {
 	return `return {
   transparent = {{.Config.Transparent}},
   on_highlights = {{default "nil" .Config.OnHighlights}},
@@ -13,7 +13,7 @@ func configTemplate() string {
 }`
 }
 
-func paletteTemplate() string {
+func Palette() string {
 	return `return {
   {{range $index, $value := .Palette -}}
   {{"  "}}{{$index}} = "{{upper $value}}",
@@ -21,7 +21,7 @@ func paletteTemplate() string {
 }`
 }
 
-func initTemplate() string {
+func Root() string {
 	return `local M = {}
 M.config = require("{{.Name}}.config")
 M.colors = require("{{.Name}}.palette")
@@ -72,6 +72,7 @@ M.set_highlight = function(colors, config)
 	if config.on_colors then
 		colors = vim.tbl_extend("force", colors, config.on_colors(colors))
 	end
+  -- EDITOR :h highlight-groups
   {{- range $index, $group := .Highlights.Editor -}}
   {{if get $group "link"}}
 	nvim_set_hl("{{$group.name}}", { link = "{{$group.link}}" })
@@ -94,6 +95,30 @@ M.set_highlight = function(colors, config)
     {{- if get $group "transparent" }},config{{end}})
   {{- end -}}
   {{- end -}}
+  -- SYNTAX :h group-name
+  {{- range $index, $group := .Highlights.Syntax -}}
+  {{if get $group "link"}}
+  nvim_set_hl("{{$group.name}}", { link = "{{$group.link}}" })
+  {{else}}
+  nvim_set_hl("{{$group.name}}", {
+    {{- if get $group "fg"}}fg = colors.{{$group.fg}},{{else}}{{end}}
+    {{- if get $group "bg"}}bg = colors.{{$group.bg}},{{else}}{{end}}
+    {{- if get $group "blend"}}blend = {{$group.blend}},{{end}}
+    {{- if get $group "bold"}}bold = {{$group.bold}},{{end}}
+    {{- if get $group "standout"}}standout = {{$group.standout}},{{end}}
+    {{- if get $group "underline"}}underline = {{$group.underline}},{{end}}
+    {{- if get $group "undercurl"}}undercurl = {{$group.undercurl}},{{end}}
+    {{- if get $group "underdouble"}}underdouble = {{$group.underdouble}},{{end}}
+    {{- if get $group "underdotted"}}underdotted = {{$group.underdotted}},{{end}}
+    {{- if get $group "underdashed"}}underdashed = {{$group.underdashed}},{{end}}
+    {{- if get $group "strikethrough"}}strikethrough = {{$group.strikethrough}},{{end}}
+    {{- if get $group "italic"}}italic = {{$group.italic}},{{end}}
+    {{- if get $group "reverse"}}reverse = {{$group.reverse}},{{end}}
+    {{- if get $group "nocombine"}}nocombine = {{$group.nocombine}},{{end}}}
+    {{- if get $group "transparent" }},config{{end}})
+  {{- end -}}
+  {{- end -}}
+   -- PLUGINS
   {{- range $x, $groups := .Highlights.Plugins}}
   {{- range $y, $group_vals := $groups}}
   if config.plugins["{{$y}}"] then
@@ -139,7 +164,7 @@ return M
   `
 }
 
-func utilsTemplate() string {
+func Utils() string {
 	return `local function to_hex(decimal)
   if type(decimal) ~= "number" then
     return decimal
@@ -165,7 +190,7 @@ return {
 }`
 }
 
-func colorTemplate() string {
+func Color() string {
 	return `local M = {}
 
 function M.hex_to_rgb(hex)

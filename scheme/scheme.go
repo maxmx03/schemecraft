@@ -18,6 +18,7 @@ type Scheme struct {
 	Author     string            `yaml:"author"`
 	Repo       string            `yaml:"repo"`
 	License    string            `yaml:"license"`
+	Contact    string            `yaml:"contact"`
 	Config     Config            `yaml:"config"`
 	Palette    map[string]string `yaml:"palette"`
 	Highlights Highlights        `yaml:"highlights"`

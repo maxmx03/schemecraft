@@ -3,6 +3,7 @@ package nvim
 import (
 	"log"
 	"path/filepath"
+	"yeahboy/nvim/template"
 	"yeahboy/scheme"
 	"yeahboy/system"
 )
@@ -25,10 +26,9 @@ type projectStructure struct {
 		loadSpec  string
 		setupSpec string
 	}
-	colorscheme string
-	dockerfile  string
-	compose     string
-	shell       string
+	dockerfile string
+	compose    string
+	shell      string
 }
 
 func Create(scheme scheme.Scheme) {
@@ -46,7 +46,6 @@ func Create(scheme scheme.Scheme) {
 	project.tests.dir = filepath.Join(root, "tests")
 	project.tests.loadSpec = filepath.Join(project.tests.dir, "load_spec.lua")
 	project.tests.setupSpec = filepath.Join(project.tests.dir, "setup_spec.lua")
-	project.colorscheme = filepath.Join(root, "colorscheme.yml")
 	project.dockerfile = filepath.Join(root, "Dockerfile")
 	project.compose = filepath.Join(root, "docker-compose.yml")
 	project.shell = filepath.Join(root, "shell.nix")
@@ -64,10 +63,17 @@ func Create(scheme scheme.Scheme) {
 		}
 	}
 
-	createFile(project.lua.config, scheme, configTemplate())
-	createFile(project.lua.palette, scheme, paletteTemplate())
-	createFile(project.lua.color, scheme, colorTemplate())
-	createFile(project.lua.init, scheme, initTemplate())
+	createFile(project.compose, scheme, template.DockerCompose())
+	createFile(project.dockerfile, scheme, template.DockerFile())
+	createFile(project.shell, scheme, template.NixShell())
+	createFile(project.tests.setupSpec, scheme, template.SetupSpec())
+	createFile(project.tests.loadSpec, scheme, template.LoadSpec())
+	createFile(project.colors.colorscheme, scheme, template.Colors())
+	createFile(project.lua.utils, scheme, template.Utils())
+	createFile(project.lua.config, scheme, template.Config())
+	createFile(project.lua.palette, scheme, template.Palette())
+	createFile(project.lua.color, scheme, template.Color())
+	createFile(project.lua.init, scheme, template.Root())
 	log.Printf("%v.lua created successfully", scheme.Name)
 }
 
