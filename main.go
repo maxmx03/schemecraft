@@ -4,19 +4,26 @@ import (
 	"gopkg.in/yaml.v3"
 	"log"
 	"os"
-	"yeahboy-colorgen/nvim"
-	"yeahboy-colorgen/scheme"
+	"yeahboy/nvim"
+	"yeahboy/scheme"
 )
 
 func main() {
 	var scheme scheme.Scheme = ReadYaml()
+
+	if len(os.Args) < 2 {
+		log.Fatalf(`
+    Usage:
+    yeahboy create # to generate colorscheme
+    yeahboy update # to update colorscheme
+    `)
+	}
+
 	var argument = os.Args[1]
 
 	switch argument {
 	case "create":
-		if err := nvim.Create(scheme); err != nil {
-			log.Fatal(err)
-		}
+		nvim.Create(scheme)
 	default:
 		log.Printf("Invalid Argument %v\n", argument)
 		log.Println("Usage: yeahboy create or yeahboy update")

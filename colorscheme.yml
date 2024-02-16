@@ -6,8 +6,8 @@ license: "MIT License"
 # You don't need to changes the values bellow
 config:
   transparent: false
-  on_colors: nil
-  on_highlights: nil
+  on_colors: ~
+  on_highlights: ~
   plugins:
     nvim-lspconfig: true
     nvim-treesitter: true
@@ -38,27 +38,31 @@ palette:
   git_removed: "#ff5555"
 highlights:
   editor:
-    Normal:
-      fg: base0
+    - name: "Normal"
       bg: base03
-    NormalNC:
+      fg: base0
+      # mark the highlight group to be transparent when the user set transparent to true
+      transparent: true
+    - name: "NormalNC"
       link: "Normal"
   syntax:
-    Comment:
+    - name: "Comment"
       fg: base01
       bg: base03
-    Constant:
+    - name: "Constant"
       fg: purple
       italic: true
       bold: true
-    Variable:
+    - name: "Variable"
       link: "Constant"
-  modules:
-    treesitter:
-      "@variable.parameter":
-        fg: orange
-      "@comment":
-        fg: base01
-    tree:
-      directory:
-        fg: green
+  plugins:
+    - treesitter:
+        - name: "@variable.parameter"
+          fg: orange
+        - name: "@comment"
+          fg: base01
+    - tree:
+        - name: directory
+          fg: green
+        - name: directory
+          fg: green

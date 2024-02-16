@@ -1,9 +1,10 @@
 package system
 
 import (
+	"github.com/Masterminds/sprig/v3"
 	"os"
 	"text/template"
-	"yeahboy-colorgen/scheme"
+	"yeahboy/scheme"
 )
 
 func CreateDir(directory string) error {
@@ -19,7 +20,7 @@ func WriteTemplateFile(filePath string, scheme scheme.Scheme, schemeTemplate str
 
 	defer file.Close()
 
-	var tmpl = template.Must(template.New(scheme.Name).Parse(schemeTemplate))
+	var tmpl = template.Must(template.New(scheme.Name).Funcs(sprig.FuncMap()).Parse(schemeTemplate))
 	err = tmpl.Execute(file, scheme)
 
 	if err != nil {

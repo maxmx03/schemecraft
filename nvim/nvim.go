@@ -3,8 +3,8 @@ package nvim
 import (
 	"log"
 	"path/filepath"
-	"yeahboy-colorgen/scheme"
-	"yeahboy-colorgen/system"
+	"yeahboy/scheme"
+	"yeahboy/system"
 )
 
 type projectStructure struct {
@@ -18,6 +18,7 @@ type projectStructure struct {
 		config  string
 		palette string
 		utils   string
+		color   string
 	}
 	tests struct {
 		dir       string
@@ -30,7 +31,7 @@ type projectStructure struct {
 	shell       string
 }
 
-func Create(scheme scheme.Scheme) error {
+func Create(scheme scheme.Scheme) {
 	var project projectStructure
 
 	var root = "build"
@@ -41,6 +42,7 @@ func Create(scheme scheme.Scheme) error {
 	project.lua.utils = filepath.Join(project.lua.dir, "utils.lua")
 	project.lua.config = filepath.Join(project.lua.dir, "config.lua")
 	project.lua.palette = filepath.Join(project.lua.dir, "palette.lua")
+	project.lua.color = filepath.Join(project.lua.dir, "color.lua")
 	project.tests.dir = filepath.Join(root, "tests")
 	project.tests.loadSpec = filepath.Join(project.tests.dir, "load_spec.lua")
 	project.tests.setupSpec = filepath.Join(project.tests.dir, "setup_spec.lua")
@@ -62,14 +64,19 @@ func Create(scheme scheme.Scheme) error {
 		}
 	}
 
-	var err error = createFile(project.lua.config, scheme, configTemplate())
-	log.Printf("%v.nvim created successfuly", scheme.Name)
-
-	return err
+	createFile(project.lua.config, scheme, configTemplate())
+	createFile(project.lua.palette, scheme, paletteTemplate())
+	createFile(project.lua.color, scheme, colorTemplate())
+	createFile(project.lua.init, scheme, initTemplate())
+	log.Printf("%v.lua created successfully", scheme.Name)
 }
 
 func Update() {}
 
-func createFile(file string, scheme scheme.Scheme, schemeTemplate string) error {
-	return system.WriteTemplateFile(file, scheme, schemeTemplate)
+func createFile(file string, scheme scheme.Scheme, schemeTemplate string) {
+	var err error = system.WriteTemplateFile(file, scheme, schemeTemplate)
+
+	if err != nil {
+		panic(err)
+	}
 }
