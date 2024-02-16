@@ -9,7 +9,7 @@ describe("{{.Name}}.load", function()
 	end)
 
 	test("name", function()
-		local expected = "{{.Name}}}"
+		local expected = "{{.Name}}"
 		assert.equal(expected, vim.g.colors_name)
 	end)
 
