@@ -3,17 +3,24 @@ author: Max Del Canto
 repo: github.com/maxmx03/dracula.nvim
 contact: ""
 license: "MIT License"
-default_config:
+# You don't need to changes the values bellow
+config:
   transparent: false
   on_colors: nil
   on_highlights: nil
-  modules:
-    treesitter: true
+  plugins:
+    nvim-lspconfig: true
+    nvim-treesitter: true
+    neo-tree.nvim: true
+# You can change the values, no need to be like base0,base01
 palette:
-  base0: "#f8f8f2"
-  base01: "#6272a4"
-  base02: "#21222c"
-  base03: "#252a36"
+  base0: "#f8f8f2" # foreground
+  base01: "#6272a4" # comment
+  base02: "#21222c" # background highlight (currentline, fold)
+  base03: "#252a36" # background
+  # base04:
+  # base05:
+  # ... for darker background colors
   yellow: "#f1fa8c"
   cyan: "#8be9fd"
   green: "#50fa7b"
@@ -53,5 +60,5 @@ highlights:
       "@comment":
         fg: base01
     tree:
-       directory:
-         fg: green
+      directory:
+        fg: green
