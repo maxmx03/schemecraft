@@ -41,10 +41,7 @@ endif
   {{- if get $group "link"}}
 hi! link {{$group.name}} {{$group.link}}
   {{- else}}
-hi {{$group.name}}
-{{- if get $group "fg"}} guifg={{default "NONE" (get $.Palette $group.fg)}}{{end}}
-{{- if get $group "bg"}} guibg={{default "NONE" (get $.Palette $group.bg)}}{{end}}
-{{- if get $group "gui"}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}{{end}}
+hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} guibg={{default "NONE" (get $.Palette (get $group "bg"))}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}
   {{- end -}}
 {{- end -}}
 
@@ -52,12 +49,8 @@ hi {{$group.name}}
   {{- if get $group "link"}}
 hi! link {{$group.name}} {{$group.link}}
   {{- else}}
-hi {{$group.name}}
-{{- if get $group "fg"}} guifg={{default "NONE" (get $.Palette $group.fg)}}{{end}}
-{{- if get $group "bg"}} guibg={{default "NONE" (get $.Palette $group.bg)}}{{end}}
-{{- if get $group "sp"}} guisp={{default "NONE" (get $.Palette $group.sp)}}{{end}}
-{{- if get $group "gui"}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}{{end}}
-  {{- end -}}
+hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} guibg={{default "NONE" (get $.Palette (get $group "bg"))}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}
+{{- end -}}
 {{- end -}}
 
 {{- range $x, $groups := .Highlights.Plugins}}
@@ -67,11 +60,7 @@ if g:{{$.Name}}.plugins["{{$y}}"]
   {{- if get $group "link" -}}
   hi! link {{$group.name}} {{$group.link}}
   {{else}}
-  hi {{$group.name}}
-  {{- if get $group "fg"}} guifg={{default "NONE" (get $.Palette $group.fg)}}{{end}}
-  {{- if get $group "bg"}} guibg={{default "NONE" (get $.Palette $group.bg)}}{{end}}
-  {{- if get $group "sp"}} guisp={{default "NONE" (get $.Palette $group.sp)}}{{end}}
-  {{- if get $group "gui"}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}{{end}}
+  hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} guibg={{default "NONE" (get $.Palette (get $group "bg"))}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}
 {{- end -}}
 {{end}}
 endif
