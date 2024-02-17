@@ -46,13 +46,16 @@ highlights:
     - name: "NormalNC"
       link: "Normal"
   syntax:
+    - name: "Function"
+      link: "Constant"
     - name: "Comment"
       fg: base01
       bg: base03
     - name: "Constant"
-      fg: purple
-      italic: true
-      bold: true
+      fg: purple # vim and neovim
+      italic: true # for neovim only
+      bold: true # for neovim only
+      gui: italic,bold # for vim9 only
     - name: "Variable"
       link: "Constant"
   plugins:

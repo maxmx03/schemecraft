@@ -14,12 +14,12 @@ type Highlights struct {
 }
 
 type Scheme struct {
-	Name       string            `yaml:"name"`
-	Author     string            `yaml:"author"`
-	Repo       string            `yaml:"repo"`
-	License    string            `yaml:"license"`
-	Contact    string            `yaml:"contact"`
-	Config     Config            `yaml:"config"`
-	Palette    map[string]string `yaml:"palette"`
-	Highlights Highlights        `yaml:"highlights"`
+	Name       string                 `yaml:"name"`
+	Author     string                 `yaml:"author"`
+	Repo       string                 `yaml:"repo"`
+	License    string                 `yaml:"license"`
+	Contact    string                 `yaml:"contact"`
+	Config     Config                 `yaml:"config"`
+	Palette    map[string]interface{} `yaml:"palette"`
+	Highlights Highlights             `yaml:"highlights"`
 }

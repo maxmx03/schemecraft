@@ -1,11 +1,13 @@
 package main
 
 import (
-	"gopkg.in/yaml.v3"
 	"log"
 	"os"
 	"yeahboy/nvim"
 	"yeahboy/scheme"
+	"yeahboy/vim"
+
+	"gopkg.in/yaml.v3"
 )
 
 func main() {
@@ -24,6 +26,7 @@ func main() {
 	switch argument {
 	case "create":
 		nvim.Create(scheme)
+		vim.Create(scheme)
 	default:
 		log.Printf("Invalid Argument %v\n", argument)
 		log.Println("Usage: yeahboy create or yeahboy update")

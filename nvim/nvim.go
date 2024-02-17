@@ -38,7 +38,7 @@ type projectStructure struct {
 func Create(scheme scheme.Scheme) {
 	var project projectStructure
 
-	var root = "build"
+	var root = "build/neovim"
 	project.colors.dir = filepath.Join(root, "colors")
 	project.colors.colorscheme = filepath.Join(project.colors.dir, scheme.Name+".lua")
 	project.lua.dir = filepath.Join(root, "lua", scheme.Name)
