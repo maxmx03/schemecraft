@@ -1,13 +1,12 @@
 package main
 
 import (
+	"gopkg.in/yaml.v3"
 	"log"
 	"os"
 	"yeahboy/nvim"
 	"yeahboy/scheme"
 	"yeahboy/vim"
-
-	"gopkg.in/yaml.v3"
 )
 
 func main() {
