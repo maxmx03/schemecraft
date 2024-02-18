@@ -34,10 +34,6 @@ type projectStructure struct {
 		loadSpec  string
 		setupSpec string
 	}
-	docs struct {
-		dir  string
-		file string
-	}
 	dockerfile string
 	compose    string
 	shell      string
@@ -46,7 +42,6 @@ type projectStructure struct {
 var project projectStructure
 
 func Create(scheme scheme.Scheme, isMainTheme bool) {
-
 	var root = "build"
 	var schemeName = strings.Split(scheme.Name, "_")[0]
 	root = filepath.Join(root, schemeName+".nvim")
@@ -76,8 +71,6 @@ func Create(scheme scheme.Scheme, isMainTheme bool) {
 	project.tests.dir = filepath.Join(root, "tests")
 	project.tests.loadSpec = filepath.Join(project.tests.dir, "load_spec.lua")
 	project.tests.setupSpec = filepath.Join(project.tests.dir, "setup_spec.lua")
-	project.docs.dir = filepath.Join(root, "docs")
-	project.docs.file = filepath.Join(project.docs.dir, scheme.Name+".txt")
 	project.dockerfile = filepath.Join(root, "Dockerfile")
 	project.compose = filepath.Join(root, "docker-compose.yml")
 	project.shell = filepath.Join(root, "shell.nix")
@@ -88,7 +81,6 @@ func Create(scheme scheme.Scheme, isMainTheme bool) {
 	dirs = append(dirs, project.lua.palette.dir)
 	dirs = append(dirs, project.lua.highlights.dir)
 	dirs = append(dirs, project.tests.dir)
-	dirs = append(dirs, project.docs.dir)
 
 	for _, dir := range dirs {
 		var err error = system.CreateDir(dir)
@@ -101,7 +93,6 @@ func Create(scheme scheme.Scheme, isMainTheme bool) {
 	createFile(project.compose, scheme, template.DockerCompose())
 	createFile(project.dockerfile, scheme, template.DockerFile())
 	createFile(project.shell, scheme, template.NixShell())
-	createFile(project.docs.file, scheme, template.Docs())
 	createFile(project.tests.setupSpec, scheme, template.SetupSpec())
 	createFile(project.tests.loadSpec, scheme, template.LoadSpec())
 	createFile(project.colors.file, scheme, template.Colors())

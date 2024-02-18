@@ -11,12 +11,8 @@ import (
 
 type projectStructure struct {
 	colors struct {
-		dir         string
-		colorscheme string
-	}
-	docs struct {
-		dir            string
-		colorschemeTxt string
+		dir  string
+		file string
 	}
 }
 
@@ -27,13 +23,10 @@ func Create(scheme scheme.Scheme) {
 	var schemeName = strings.Split(scheme.Name, "_")[0]
 	root = filepath.Join(root, schemeName+".vim")
 	project.colors.dir = filepath.Join(root, "colors")
-	project.colors.colorscheme = filepath.Join(project.colors.dir, scheme.Name+".vim")
-	project.docs.dir = filepath.Join(root, "docs")
-	project.docs.colorschemeTxt = filepath.Join(project.docs.dir, scheme.Name+".txt")
+	project.colors.file = filepath.Join(project.colors.dir, scheme.Name+".vim")
 
 	var dirs []string
 	dirs = append(dirs, project.colors.dir)
-	dirs = append(dirs, project.docs.dir)
 
 	for _, dir := range dirs {
 		var err error = system.CreateDir(dir)
@@ -43,8 +36,7 @@ func Create(scheme scheme.Scheme) {
 		}
 	}
 
-	createFile(project.colors.colorscheme, scheme, template.Colors())
-	createFile(project.docs.colorschemeTxt, scheme, template.Docs())
+	createFile(project.colors.file, scheme, template.Colors())
 	log.Printf("%v.vim created successfully", scheme.Name)
 }
 

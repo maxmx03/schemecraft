@@ -5,6 +5,5 @@ pkgs.mkShell {
     gopls
     markdownlint-cli
     marksman
-    luajitPackages.vusted
   ];
 }
