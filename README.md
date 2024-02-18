@@ -10,3 +10,20 @@
 </div>
 
 WORKING IN PROGRESS...
+
+## Usage
+
+```bash
+go build
+```
+
+```bash
+./yeahboy create dracula dracula_light
+```
+
+### Output
+
+```bash
+build/dracula.nvim
+build/dracula.vim
+```

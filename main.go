@@ -1,40 +1,41 @@
 package main
 
 import (
-	"gopkg.in/yaml.v3"
 	"log"
 	"os"
 	"yeahboy/nvim"
 	"yeahboy/scheme"
 	"yeahboy/vim"
+
+	"gopkg.in/yaml.v3"
 )
 
 func main() {
-	var scheme scheme.Scheme = ReadYaml()
 
 	if len(os.Args) < 2 {
 		log.Fatalf(`
     Usage:
-    yeahboy create # to generate colorscheme
-    yeahboy update # to update colorscheme
+    yeahboy create colorscheme... # to generate colorscheme
     `)
 	}
-
 	var argument = os.Args[1]
 
 	switch argument {
 	case "create":
-		nvim.Create(scheme)
-		vim.Create(scheme)
+		for index, arg := range os.Args[2:] {
+			var scheme scheme.Scheme = ReadYaml(arg + ".yml")
+			var isMainTheme bool = index == 0
+			nvim.Create(scheme, isMainTheme)
+			vim.Create(scheme)
+		}
 	default:
-		log.Printf("Invalid Argument %v\n", argument)
-		log.Println("Usage: yeahboy create or yeahboy update")
+		log.Fatalf("Invalid Argument %v\nUsage: yeahboy create colorscheme", argument)
 	}
 }
 
-func ReadYaml() scheme.Scheme {
+func ReadYaml(filename string) scheme.Scheme {
 	var scheme scheme.Scheme
-	var yamlFile, err = os.ReadFile("colorscheme.yml")
+	var yamlFile, err = os.ReadFile(filename)
 
 	LogFatal("Couldn't read yaml file: ", err)
 	err = yaml.Unmarshal([]byte(yamlFile), &scheme)

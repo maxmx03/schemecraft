@@ -3,6 +3,7 @@ package vim
 import (
 	"log"
 	"path/filepath"
+	"strings"
 	"yeahboy/scheme"
 	"yeahboy/system"
 	"yeahboy/vim/template"
@@ -22,7 +23,9 @@ type projectStructure struct {
 func Create(scheme scheme.Scheme) {
 	var project projectStructure
 
-	var root = "build/vim9"
+	var root = "build"
+	var schemeName = strings.Split(scheme.Name, "_")[0]
+	root = filepath.Join(root, schemeName+".vim")
 	project.colors.dir = filepath.Join(root, "colors")
 	project.colors.colorscheme = filepath.Join(project.colors.dir, scheme.Name+".vim")
 	project.docs.dir = filepath.Join(root, "docs")

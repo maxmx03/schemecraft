@@ -5,5 +5,5 @@ func Colors() string {
 -- Repo: {{.Repo}}
 -- Maintainer: {{title .Author}} <{{.Contact}}>
 -- License: {{.License}}
-require("{{.Name}}").load()`
+require("{{.Name}}").load("{{.Name}}")`
 }

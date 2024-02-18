@@ -8,11 +8,11 @@ func Colors() string {
 # Maintainer: {{.Author}} <{{.Contact}}>
 # License: {{.License}}
 
-if exists("g:loaded_{{.Name}}")
+if exists("g:loaded_{{mustRegexFind "^[a-z]+" .Name}}")
   finish
 endif
 
-g:loaded_{{.Name}} = 1
+g:loaded_{{mustRegexFind "^[a-z]+" .Name}} = 1
 
 hi clear
 
@@ -22,11 +22,11 @@ endif
 
 set termguicolors
 g:colors_name = '{{.Name}}'
-g:{{.Name}} = {
+g:{{mustRegexFind "^[a-z]+" .Name}} = {
   plugins: {},
 }
 {{range $index, $value := .Config.Plugins -}}
-g:{{$.Name}}.plugins["{{$index}}"] = {{default false $value}}
+g:{{mustRegexFind "^[a-z]+" $.Name}}.plugins["{{$index}}"] = {{default false $value}}
 {{end -}}
 
 if (has('termguicolors') && &termguicolors) || has('gui_running')
