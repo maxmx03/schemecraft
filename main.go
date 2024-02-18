@@ -28,6 +28,20 @@ func main() {
 			nvim.Create(scheme, isMainTheme)
 			vim.Create(scheme)
 		}
+	case "update":
+		var argument = os.Args[2]
+		for index, arg := range os.Args[3:] {
+			var scheme scheme.Scheme = ReadYaml(arg + ".yml")
+			var isMainTheme bool = index == 0
+			if argument == "nvim" {
+				nvim.Update(scheme, isMainTheme)
+			} else if argument == "vim" {
+				vim.Update(scheme)
+			} else {
+				log.Fatalf("Invalid Argument %v\nUsage: yeahboy update nvim colorscheme", argument)
+				break
+			}
+		}
 	default:
 		log.Fatalf("Invalid Argument %v\nUsage: yeahboy create colorscheme", argument)
 	}

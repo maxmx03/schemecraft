@@ -41,10 +41,8 @@ type projectStructure struct {
 
 var project projectStructure
 
-func Create(scheme scheme.Scheme, isMainTheme bool) {
-	var root = "build"
+func setProject(scheme scheme.Scheme, isMainTheme bool, root string) {
 	var schemeName = strings.Split(scheme.Name, "_")[0]
-	root = filepath.Join(root, schemeName+".nvim")
 
 	if isMainTheme {
 		project.colors.dir = filepath.Join(root, "colors")
@@ -74,7 +72,9 @@ func Create(scheme scheme.Scheme, isMainTheme bool) {
 	project.dockerfile = filepath.Join(root, "Dockerfile")
 	project.compose = filepath.Join(root, "docker-compose.yml")
 	project.shell = filepath.Join(root, "shell.nix")
+}
 
+func createProjectDirs() {
 	var dirs []string
 	dirs = append(dirs, project.colors.dir)
 	dirs = append(dirs, project.lua.dir)
@@ -89,7 +89,9 @@ func Create(scheme scheme.Scheme, isMainTheme bool) {
 			panic(err)
 		}
 	}
+}
 
+func createProjectFiles(scheme scheme.Scheme) {
 	createFile(project.compose, scheme, template.DockerCompose())
 	createFile(project.dockerfile, scheme, template.DockerFile())
 	createFile(project.shell, scheme, template.NixShell())
@@ -102,7 +104,23 @@ func Create(scheme scheme.Scheme, isMainTheme bool) {
 	createFile(project.lua.highlights.file, scheme, template.Highlights())
 	createFile(project.lua.color, scheme, template.Color())
 	createFile(project.lua.file, scheme, template.Root())
+}
+
+func Create(scheme scheme.Scheme, isMainTheme bool) {
+	var schemeName = strings.Split(scheme.Name, "_")[0]
+	var root string = "build"
+	root = filepath.Join(root, schemeName+".nvim")
+	setProject(scheme, isMainTheme, root)
+	createProjectDirs()
+	createProjectFiles(scheme)
 	log.Printf("%v.lua created successfully", scheme.Name)
+}
+
+func Update(scheme scheme.Scheme, isMainTheme bool) {
+	var root string
+	setProject(scheme, isMainTheme, root)
+	createProjectFiles(scheme)
+	log.Printf("%v.lua updated successfully", scheme.Name)
 }
 
 func createFile(file string, scheme scheme.Scheme, schemeTemplate string) {

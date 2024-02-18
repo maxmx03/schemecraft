@@ -16,15 +16,14 @@ type projectStructure struct {
 	}
 }
 
-func Create(scheme scheme.Scheme) {
-	var project projectStructure
+var project projectStructure
 
-	var root = "build"
-	var schemeName = strings.Split(scheme.Name, "_")[0]
-	root = filepath.Join(root, schemeName+".vim")
+func setProject(scheme scheme.Scheme, root string) {
 	project.colors.dir = filepath.Join(root, "colors")
 	project.colors.file = filepath.Join(project.colors.dir, scheme.Name+".vim")
+}
 
+func createProjectDirs() {
 	var dirs []string
 	dirs = append(dirs, project.colors.dir)
 
@@ -35,12 +34,29 @@ func Create(scheme scheme.Scheme) {
 			panic(err)
 		}
 	}
+}
 
+func createProjectFiles(scheme scheme.Scheme) {
 	createFile(project.colors.file, scheme, template.Colors())
+}
+
+func Create(scheme scheme.Scheme) {
+	var schemeName = strings.Split(scheme.Name, "_")[0]
+	var root string = "build"
+	root = filepath.Join(root, schemeName+".vim")
+	setProject(scheme, root)
+	createProjectDirs()
+	createProjectFiles(scheme)
 	log.Printf("%v.vim created successfully", scheme.Name)
 }
 
-func Update() {}
+func Update(scheme scheme.Scheme) {
+	var root string
+	setProject(scheme, root)
+	createFile(project.colors.file, scheme, template.Colors())
+	createProjectFiles(scheme)
+	log.Printf("%v.vim updated successfully", scheme.Name)
+}
 
 func createFile(file string, scheme scheme.Scheme, schemeTemplate string) {
 	var err error = system.WriteTemplateFile(file, scheme, schemeTemplate)
