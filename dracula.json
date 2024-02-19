@@ -1,0 +1,100 @@
+{
+  "name": "dracula",
+  "author": "Max Del Canto",
+  "repo": "github.com/maxmx03/dracula.nvim",
+  "contact": "come to brazil",
+  "license": "MIT License",
+  "config": {
+    "transparent": false,
+    "on_colors": null,
+    "on_highlights": null,
+    "plugins": {
+      "nvim-lspconfig": true,
+      "nvim-treesitter": true,
+      "neo-tree.nvim": true
+    }
+  },
+  "palette": {
+    "base0": "#f8f8f2",
+    "base01": "#6272a4",
+    "base02": "#21222c",
+    "base03": "#252a36",
+    "yellow": "#f1fa8c",
+    "cyan": "#8be9fd",
+    "green": "#50fa7b",
+    "red": "#ff5555",
+    "orange": "#ffb86c",
+    "pink": "#ff79c6",
+    "purple": "#bd93f9",
+    "diag_info": "#8be9fd",
+    "diag_hint": "#8be9fd",
+    "diag_success": "#50fa7b",
+    "diag_warning": "#ffb86c",
+    "diag_error": "#ff5555",
+    "git_added": "#50fa7b",
+    "git_modified": "#ffb86c",
+    "git_removed": "#ff5555"
+  },
+  "highlights": {
+    "editor": [
+      {
+        "name": "Normal",
+        "bg": "base03",
+        "fg": "base0",
+        "transparent": true
+      },
+      {
+        "name": "NormalNC",
+        "link": "Normal"
+      }
+    ],
+    "syntax": [
+      {
+        "name": "Function",
+        "link": "Constant"
+      },
+      {
+        "name": "Comment",
+        "fg": "base01",
+        "bg": "base03"
+      },
+      {
+        "name": "Constant",
+        "fg": "purple",
+        "italic": true,
+        "bold": true,
+        "gui": "italic,bold"
+      },
+      {
+        "name": "Variable",
+        "link": "Constant"
+      }
+    ],
+    "plugins": [
+      {
+        "treesitter": [
+          {
+            "name": "@variable.parameter",
+            "fg": "orange"
+          },
+          {
+            "name": "@comment",
+            "fg": "base01"
+          }
+        ]
+      },
+      {
+        "tree": [
+          {
+            "name": "directory",
+            "fg": "green"
+          },
+          {
+            "name": "directory",
+            "fg": "green"
+          }
+        ]
+      }
+    ]
+  }
+}

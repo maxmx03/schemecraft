@@ -20,7 +20,7 @@ var project projectStructure
 
 func setProject(scheme scheme.Scheme, root string) {
 	project.colors.dir = filepath.Join(root, "colors")
-	project.colors.file = filepath.Join(project.colors.dir, scheme.Name+".vim")
+	project.colors.file = filepath.Join(project.colors.dir, scheme.GetName()+".vim")
 }
 
 func createProjectDirs() {
@@ -41,13 +41,13 @@ func createProjectFiles(scheme scheme.Scheme) {
 }
 
 func Create(scheme scheme.Scheme) {
-	var schemeName = strings.Split(scheme.Name, "_")[0]
+	var schemeName = strings.Split(scheme.GetName(), "-")[0]
 	var root string = "build"
 	root = filepath.Join(root, schemeName+".vim")
 	setProject(scheme, root)
 	createProjectDirs()
 	createProjectFiles(scheme)
-	log.Printf("%v.vim created successfully", scheme.Name)
+	log.Printf("%v.vim created successfully", scheme.GetName())
 }
 
 func Update(scheme scheme.Scheme) {
@@ -55,7 +55,7 @@ func Update(scheme scheme.Scheme) {
 	setProject(scheme, root)
 	createFile(project.colors.file, scheme, template.Colors())
 	createProjectFiles(scheme)
-	log.Printf("%v.vim updated successfully", scheme.Name)
+	log.Printf("%v.vim updated successfully", scheme.GetName())
 }
 
 func createFile(file string, scheme scheme.Scheme, schemeTemplate string) {

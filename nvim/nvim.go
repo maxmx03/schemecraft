@@ -42,24 +42,19 @@ type projectStructure struct {
 var project projectStructure
 
 func setProject(scheme scheme.Scheme, isMainTheme bool, root string) {
-	var schemeName = strings.Split(scheme.Name, "_")[0]
+	var schemeName = strings.Split(scheme.GetName(), "-")[0]
+	project.colors.dir = filepath.Join(root, "colors")
+	project.colors.file = filepath.Join(project.colors.dir, scheme.GetName()+".lua")
+	project.lua.dir = filepath.Join(root, "lua", schemeName)
+	project.lua.palette.dir = filepath.Join(project.lua.dir, "palette")
+	project.lua.highlights.dir = filepath.Join(project.lua.dir, "highlights")
 
 	if isMainTheme {
-		project.colors.dir = filepath.Join(root, "colors")
-		project.colors.file = filepath.Join(project.colors.dir, scheme.Name+".lua")
-		project.lua.dir = filepath.Join(root, "lua", scheme.Name)
-		project.lua.palette.dir = filepath.Join(project.lua.dir, "palette")
-		project.lua.highlights.dir = filepath.Join(project.lua.dir, "highlights")
 		project.lua.palette.file = filepath.Join(project.lua.palette.dir, "init.lua")
 		project.lua.highlights.file = filepath.Join(project.lua.highlights.dir, "init.lua")
 	} else {
-		project.colors.dir = filepath.Join(root, "colors")
-		project.colors.file = filepath.Join(project.colors.dir, scheme.Name+".lua")
-		project.lua.dir = filepath.Join(root, "lua", schemeName)
-		project.lua.palette.dir = filepath.Join(project.lua.dir, "palette")
-		project.lua.highlights.dir = filepath.Join(project.lua.dir, "highlights")
-		project.lua.palette.file = filepath.Join(project.lua.palette.dir, scheme.Name+".lua")
-		project.lua.highlights.file = filepath.Join(project.lua.highlights.dir, scheme.Name+".lua")
+		project.lua.palette.file = filepath.Join(project.lua.palette.dir, scheme.GetName()+".lua")
+		project.lua.highlights.file = filepath.Join(project.lua.highlights.dir, scheme.GetName()+".lua")
 	}
 
 	project.lua.file = filepath.Join(project.lua.dir, "init.lua")
@@ -107,20 +102,20 @@ func createProjectFiles(scheme scheme.Scheme) {
 }
 
 func Create(scheme scheme.Scheme, isMainTheme bool) {
-	var schemeName = strings.Split(scheme.Name, "_")[0]
+	var schemeName = strings.Split(scheme.GetName(), "-")[0]
 	var root string = "build"
 	root = filepath.Join(root, schemeName+".nvim")
 	setProject(scheme, isMainTheme, root)
 	createProjectDirs()
 	createProjectFiles(scheme)
-	log.Printf("%v.lua created successfully", scheme.Name)
+	log.Printf("%v.lua created successfully", scheme.GetName())
 }
 
 func Update(scheme scheme.Scheme, isMainTheme bool) {
 	var root string
 	setProject(scheme, isMainTheme, root)
 	createProjectFiles(scheme)
-	log.Printf("%v.lua updated successfully", scheme.Name)
+	log.Printf("%v.lua updated successfully", scheme.GetName())
 }
 
 func createFile(file string, scheme scheme.Scheme, schemeTemplate string) {

@@ -18,7 +18,9 @@ go build
 ```
 
 ```bash
-./yeahboy create dracula dracula_light
+./yeahboy create dracula.json dracula-light.json
+or
+./yeahboy create dracula.yml dracula-light.yml
 ```
 
 ### Output

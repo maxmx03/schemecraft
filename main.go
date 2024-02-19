@@ -3,36 +3,41 @@ package main
 import (
 	"log"
 	"os"
+	"strings"
 	"yeahboy/nvim"
 	"yeahboy/scheme"
+	"yeahboy/system"
 	"yeahboy/vim"
-
-	"gopkg.in/yaml.v3"
 )
 
 func main() {
-
 	if len(os.Args) < 2 {
 		log.Fatalf(`
     Usage:
     yeahboy create colorscheme... # to generate colorscheme
     `)
 	}
+
 	var argument = os.Args[1]
 
 	switch argument {
 	case "create":
-		for index, arg := range os.Args[2:] {
-			var scheme scheme.Scheme = ReadYaml(arg + ".yml")
+		var arguments []string = os.Args[2:]
+
+		for index, arg := range arguments {
+			var scheme scheme.Scheme = ReadFile(arg)
 			var isMainTheme bool = index == 0
 			nvim.Create(scheme, isMainTheme)
 			vim.Create(scheme)
 		}
 	case "update":
 		var argument = os.Args[2]
-		for index, arg := range os.Args[3:] {
-			var scheme scheme.Scheme = ReadYaml(arg + ".yml")
+		var arguments []string = os.Args[3:]
+
+		for index, arg := range arguments {
+			var scheme scheme.Scheme = ReadFile(arg)
 			var isMainTheme bool = index == 0
+
 			if argument == "nvim" {
 				nvim.Update(scheme, isMainTheme)
 			} else if argument == "vim" {
@@ -47,19 +52,18 @@ func main() {
 	}
 }
 
-func ReadYaml(filename string) scheme.Scheme {
-	var scheme scheme.Scheme
-	var yamlFile, err = os.ReadFile(filename)
-
-	LogFatal("Couldn't read yaml file: ", err)
-	err = yaml.Unmarshal([]byte(yamlFile), &scheme)
-	LogFatal("Couldn't unmarshal", err)
-
-	return scheme
+func isYaml(value string) bool {
+	return strings.HasSuffix(value, "yml") || strings.HasSuffix(value, "yaml")
 }
 
-func LogFatal(msg string, err error) {
-	if err != nil {
-		log.Fatalf("%v %v", msg, err)
+func ReadFile(file string) scheme.Scheme {
+	var scheme scheme.Scheme
+
+	if isYaml(file) {
+		scheme = system.ReadYaml(file)
+	} else {
+		scheme = system.ReadJson(file)
 	}
+
+	return scheme
 }
