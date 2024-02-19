@@ -15,7 +15,7 @@ func Config() string {
 
 func Root() string {
 	return `local M = {}
-M.config = require("{{.Name}}.config")
+M.config = require("{{mustRegexFind "^[a-z]+" .Name}}.config")
 
 M.setup = function(config)
 	M.config = vim.tbl_extend("force", M.config, config)
