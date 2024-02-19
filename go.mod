@@ -1,4 +1,4 @@
-module yeahboy
+module schemecraft
 
 go 1.21.5
 

@@ -6,8 +6,8 @@ import (
 	"gopkg.in/yaml.v3"
 	"log"
 	"os"
+	"schemecraft/scheme"
 	"text/template"
-	"yeahboy/scheme"
 )
 
 func CreateDir(directory string) error {

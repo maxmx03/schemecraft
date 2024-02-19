@@ -3,18 +3,18 @@ package main
 import (
 	"log"
 	"os"
+	"schemecraft/nvim"
+	"schemecraft/scheme"
+	"schemecraft/system"
+	"schemecraft/vim"
 	"strings"
-	"yeahboy/nvim"
-	"yeahboy/scheme"
-	"yeahboy/system"
-	"yeahboy/vim"
 )
 
 func main() {
 	if len(os.Args) < 2 {
 		log.Fatalf(`
     Usage:
-    yeahboy create colorscheme... # to generate colorscheme
+    schemecraft create colorscheme.json ... # to generate colorscheme
     `)
 	}
 
@@ -43,12 +43,12 @@ func main() {
 			} else if argument == "vim" {
 				vim.Update(scheme)
 			} else {
-				log.Fatalf("Invalid Argument %v\nUsage: yeahboy update nvim colorscheme", argument)
+				log.Fatalf("Invalid Argument %v\nUsage: schemecraft update nvim colorscheme.json", argument)
 				break
 			}
 		}
 	default:
-		log.Fatalf("Invalid Argument %v\nUsage: yeahboy create colorscheme", argument)
+		log.Fatalf("Invalid Argument %v\nUsage: schemecraft create colorscheme.json", argument)
 	}
 }
 

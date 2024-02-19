@@ -5,5 +5,6 @@ pkgs.mkShell {
     gopls
     markdownlint-cli
     marksman
+    nodejs_21
   ];
 }

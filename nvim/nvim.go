@@ -3,10 +3,10 @@ package nvim
 import (
 	"log"
 	"path/filepath"
+	"schemecraft/nvim/template"
+	"schemecraft/scheme"
+	"schemecraft/system"
 	"strings"
-	"yeahboy/nvim/template"
-	"yeahboy/scheme"
-	"yeahboy/system"
 )
 
 type projectStructure struct {

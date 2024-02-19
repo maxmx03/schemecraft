@@ -3,10 +3,10 @@ package vim
 import (
 	"log"
 	"path/filepath"
+	"schemecraft/scheme"
+	"schemecraft/system"
+	"schemecraft/vim/template"
 	"strings"
-	"yeahboy/scheme"
-	"yeahboy/system"
-	"yeahboy/vim/template"
 )
 
 type projectStructure struct {
