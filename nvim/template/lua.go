@@ -1,7 +1,11 @@
 package template
 
 func Config() string {
-	return `return {
+	return `---@class {{mustRegexFind "^[a-z]+" .Name}}.config
+---@field transparent? boolean
+---@field on_highlights? fun(colors: {{mustRegexFind "^[a-z]+" .Name}}.palette, color: table): {{mustRegexFind "^[a-z]+" .Name}}.highlights
+---@field on_colors? fun(colors: {{mustRegexFind "^[a-z]+" .Name}}.palette, color: table): {{mustRegexFind "^[a-z]+" .Name}}.palette
+return {
   transparent = {{.Config.Transparent}},
   on_highlights = {{default "nil" .Config.OnHighlights}},
   on_colors = {{default "nil" .Config.OnColors}},
@@ -14,7 +18,12 @@ func Config() string {
 }
 
 func Root() string {
-	return `local M = {}
+	return `---@class {{mustRegexFind "^[a-z]+" .Name}}
+---@field config {{mustRegexFind "^[a-z]+" .Name}}.config
+---@field setup fun(config: {{mustRegexFind "^[a-z]+" .Name}}.config)
+---@field load fun(theme: string)
+local M = {}
+
 M.config = require("{{mustRegexFind "^[a-z]+" .Name}}.config")
 
 M.setup = function(config)
@@ -76,7 +85,15 @@ return {
 }
 
 func Color() string {
-	return `local M = {}
+	return `---@class {{mustRegexFind "^[a-z]+" .Name}}.color
+---@field hex_to_rgb fun(hex: string): number, number, number
+---@field rgb_to_hex fun(red: number, green: number, blue: number): string
+---@field darken fun(hex: string, percentage: number): string
+---@field lighten fun(hex: string, percentage: number): string
+---@field shade fun(hex: string, i: number): string
+---@field tint fun(hex: string, i: number): string
+---@field blend fun(fg: string, bg: string, alpha: number): string
+local M = {}
 
 function M.hex_to_rgb(hex)
   local red = tonumber(hex:sub(2, 3), 16)
@@ -131,6 +148,10 @@ function M.tint(hex, i)
   return M.rgb_to_hex(result.red, result.green, result.blue)
 end
 
+---@param fg number
+---@param bg number
+---@param alpha number
+---@return number
 local function blend_channel(fg, bg, alpha)
   local ret = alpha * fg + ((1 - alpha) * bg)
   local min = math.min
