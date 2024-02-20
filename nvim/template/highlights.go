@@ -52,7 +52,7 @@ M.set_highlight = function(colors, config)
   {{- range $index, $group := .Highlights.Editor -}}
   {{if get $group "link"}}
 	nvim_set_hl("{{$group.name}}", { link = "{{$group.link}}" })
-  {{else}}
+  {{- else}}
 	nvim_set_hl("{{$group.name}}", {
     {{- if get $group "fg"}}fg = colors.{{$group.fg}},{{end}}
     {{- if get $group "bg"}}bg = colors.{{$group.bg}},{{end}}
@@ -75,7 +75,7 @@ M.set_highlight = function(colors, config)
   {{- range $index, $group := .Highlights.Syntax -}}
   {{if get $group "link"}}
   nvim_set_hl("{{$group.name}}", { link = "{{$group.link}}" })
-  {{else}}
+  {{- else}}
   nvim_set_hl("{{$group.name}}", {
     {{- if get $group "fg"}}fg = colors.{{$group.fg}},{{else}}{{end}}
     {{- if get $group "bg"}}bg = colors.{{$group.bg}},{{else}}{{end}}
@@ -99,12 +99,12 @@ M.set_highlight = function(colors, config)
   {{- range $y, $group_vals := $groups}}
   if config.plugins["{{$y}}"] then
   {{- range $z, $group := $group_vals}}
-  {{- if get $group "link" -}}
+  {{- if get $group "link"}}
     nvim_set_hl("{{$group.name}}", { link = "{{$group.link}}" })
-  {{else}}
+  {{- else}}
     nvim_set_hl("{{$group.name}}", {
-    {{- if get $group "fg"}}fg = colors.{{$group.fg}},{{else}}{{end}}
-    {{- if get $group "bg"}}bg = colors.{{$group.bg}},{{else}}{{end}}
+    {{- if get $group "fg"}}fg = colors.{{$group.fg}},{{end}}
+    {{- if get $group "bg"}}bg = colors.{{$group.bg}},{{end}}
     {{- if get $group "blend"}}blend = {{$group.blend}},{{end}}
     {{- if get $group "bold"}}bold = {{$group.bold}},{{end}}
     {{- if get $group "standout"}}standout = {{$group.standout}},{{end}}
