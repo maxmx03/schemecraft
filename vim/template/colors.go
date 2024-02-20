@@ -59,9 +59,9 @@ hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} gu
   {{- range $y, $group_vals := $groups}}
 if g:{{$.Name}}.plugins["{{$y}}"]
   {{- range $z, $group := $group_vals}}
-  {{- if get $group "link" -}}
+  {{- if get $group "link"}}
   hi! link {{$group.name}} {{$group.link}}
-  {{else}}
+  {{- else}}
   hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} guibg={{default "NONE" (get $.Palette (get $group "bg"))}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}
 {{- end -}}
 {{end}}
