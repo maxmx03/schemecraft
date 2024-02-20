@@ -66,7 +66,7 @@ func Utils() string {
     return decimal
   end
   local hex = string.format("#%06x", decimal)
-  return hex
+  return hex:upper()
 end
 
 local function nvim_get_hl(name)
