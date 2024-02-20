@@ -54,8 +54,8 @@ M.set_highlight = function(colors, config)
 	nvim_set_hl("{{$group.name}}", { link = "{{$group.link}}" })
   {{else}}
 	nvim_set_hl("{{$group.name}}", {
-    {{- if get $group "fg"}}fg = colors.{{$group.fg}},{{else}}{{end}}
-    {{- if get $group "bg"}}bg = colors.{{$group.bg}},{{else}}{{end}}
+    {{- if get $group "fg"}}fg = colors.{{$group.fg}},{{end}}
+    {{- if get $group "bg"}}bg = colors.{{$group.bg}},{{end}}
     {{- if get $group "blend"}}blend = {{$group.blend}},{{end}}
     {{- if get $group "bold"}}bold = {{$group.bold}},{{end}}
     {{- if get $group "standout"}}standout = {{$group.standout}},{{end}}

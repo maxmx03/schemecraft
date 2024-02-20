@@ -49,7 +49,6 @@ highlights:
     - name: "Function"
       link: "Constant"
     - name: "Comment"
-      fg: base01
       bg: base03
     - name: "Constant"
       fg: purple # vim and neovim
