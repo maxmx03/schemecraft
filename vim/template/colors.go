@@ -25,8 +25,10 @@ g:colors_name = '{{.Name}}'
 g:{{mustRegexFind "^[a-z]+" .Name}} = {
   plugins: {},
 }
-{{range $index, $value := .Config.Plugins -}}
-g:{{mustRegexFind "^[a-z]+" $.Name}}.plugins["{{$index}}"] = {{default false $value}}
+{{range $index, $plugins := .Highlights.Plugins -}}
+{{range $pluginName, $pluginConfigs:= $plugins -}}
+g:{{mustRegexFind "^[a-z]+" $.Name}}.plugins["{{$pluginName}}"] = true,
+{{end -}}
 {{end -}}
 
 if (has('termguicolors') && &termguicolors) || has('gui_running')

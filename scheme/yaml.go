@@ -1,10 +1,9 @@
 package scheme
 
 type ConfigYaml struct {
-	Transparent  bool            `yaml:"transparent"`
-	OnHighlights string          `yaml:"on_highlights"`
-	OnColors     string          `yaml:"on_colors"`
-	Plugins      map[string]bool `yaml:"plugins"`
+	Transparent  bool   `yaml:"transparent"`
+	OnHighlights string `yaml:"on_highlights"`
+	OnColors     string `yaml:"on_colors"`
 }
 
 type HighlightsYaml struct {
@@ -66,10 +65,6 @@ func (c ConfigYaml) GetOnHighlights() string {
 
 func (c ConfigYaml) GetOnColors() string {
 	return c.OnColors
-}
-
-func (c ConfigYaml) GetPlugins() map[string]bool {
-	return c.Plugins
 }
 
 func (h HighlightsYaml) GetEditor() []interface{} {

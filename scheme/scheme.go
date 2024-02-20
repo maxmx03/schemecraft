@@ -4,7 +4,6 @@ type Config interface {
 	GetTransparent() bool
 	GetOnHighlights() string
 	GetOnColors() string
-	GetPlugins() map[string]bool
 }
 
 type Highlights interface {

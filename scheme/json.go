@@ -1,10 +1,9 @@
 package scheme
 
 type ConfigJson struct {
-	Transparent  bool            `json:"transparent"`
-	OnHighlights string          `json:"on_highlights"`
-	OnColors     string          `json:"on_colors"`
-	Plugins      map[string]bool `json:"plugins"`
+	Transparent  bool   `json:"transparent"`
+	OnHighlights string `json:"on_highlights"`
+	OnColors     string `json:"on_colors"`
 }
 
 type HighlightsJson struct {
@@ -66,10 +65,6 @@ func (c ConfigJson) GetOnHighlights() string {
 
 func (c ConfigJson) GetOnColors() string {
 	return c.OnColors
-}
-
-func (c ConfigJson) GetPlugins() map[string]bool {
-	return c.Plugins
 }
 
 func (h HighlightsJson) GetEditor() []interface{} {

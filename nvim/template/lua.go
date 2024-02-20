@@ -10,8 +10,10 @@ return {
   on_highlights = {{default "nil" .Config.OnHighlights}},
   on_colors = {{default "nil" .Config.OnColors}},
   plugins = {
-  {{range $index, $value := .Config.Plugins -}}
-  {{"  "}}["{{$index}}"] = {{default true $value}},
+  {{range $index, $plugins := .Highlights.Plugins -}}
+  {{range $pluginName, $pluginConfigs:= $plugins -}}
+  {{"  "}}["{{$pluginName}}"] = true,
+  {{end -}}
   {{end -}}
   }
 }`

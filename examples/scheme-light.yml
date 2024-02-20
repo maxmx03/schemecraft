@@ -8,10 +8,7 @@ config:
   transparent: false
   on_colors: ~
   on_highlights: ~
-  plugins:
-    nvim-lspconfig: true
-    nvim-treesitter: true
-    neo-tree.nvim: true
+  plugins: ~
 # You can change the values, no need to be like base0,base01
 palette:
   base0: "#f8f8f2" # foreground

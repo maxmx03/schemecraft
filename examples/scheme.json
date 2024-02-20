@@ -8,11 +8,7 @@
     "transparent": false,
     "on_colors": null,
     "on_highlights": null,
-    "plugins": {
-      "nvim-lspconfig": true,
-      "nvim-treesitter": true,
-      "neo-tree.nvim": true
-    }
+    "plugins": null
   },
   "palette": {
     "base0": "#f8f8f2",
