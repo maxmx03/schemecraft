@@ -87,6 +87,7 @@ return {
       {{"  "}}["{{$pluginName}}"] = true,
       {{end -}}
       {{end -}}
+      }
       })
       vim.cmd.colorscheme '{{.Name}}'
     end
