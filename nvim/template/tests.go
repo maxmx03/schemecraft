@@ -18,17 +18,25 @@ describe("{{.Name}}.load", function()
 		assert.True(type(colors) == "table")
 	end)
 
-	test("set highlight", function()
-		local string = nvim_get_hl("String")
-		local colors = require("{{mustRegexFind "^[a-z]+" .Name}}.palette")
-		local expected = colors.orange
-		assert.equal(expected, string.fg)
-	end)
-
-	test("default config", function()
+  test("default config", function()
 		local config = require("{{mustRegexFind "^[a-z]+" .Name}}.config")
 		assert.True(type(config) == "table")
 	end)
+
+  test("set_highlight", function()
+  {{- range $index, $group := .Highlights.Syntax}}
+   local {{$group.name}} = nvim_get_hl("{{$group.name}}")
+   {{- if $group.fg }}
+   assert.True("{{upper (get $.Palette (print $group.fg))}}" == {{$group.name}}.fg)
+   {{end}}
+   {{- if $group.bg }}
+   assert.True("{{upper (get $.Palette (print $group.bg))}}" == {{$group.name}}.bg)
+   {{end}}
+   {{- if $group.link }}
+   assert.True("{{$group.link}}" == {{$group.name}}.link)
+   {{end}}
+  {{- end -}}
+  end)
 end)`
 }
 
@@ -42,17 +50,14 @@ describe("{{mustRegexFind "^[a-z]+" .Name}}.setup", function()
 			transparent = true,
 			on_colors = function()
 				return {
-					yellow = "#ffffff",
+					mycolor = "#ffffff",
 				}
 			end,
-			on_highlight = function()
+			on_highlight = function(colors)
 				return {
-					Type = { bg = "#ffffff" },
+					CustomHighlight = { fg = colors.mycolor },
 				}
 			end,
-			plugins = {
-				["nvim-treesitter"] = true,
-			},
 		})
 		vim.cmd("colorscheme {{mustRegexFind "^[a-z]+" .Name}}")
 	end)
@@ -62,20 +67,10 @@ describe("{{mustRegexFind "^[a-z]+" .Name}}.setup", function()
 		assert.falsy(normal.bg)
 	end)
 
-	test("on_colors", function()
-		local expected = nvim_get_hl("Function").fg
-		assert.True(expected ~= colors.yellow)
-	end)
-
-	test("on_highlight", function()
-		local user_group = nvim_get_hl("Type")
-		local expected = { fg = colors.green, bg = "#ffffff" }
+	test("on_colors and on_highlight", function()
+		local user_group = nvim_get_hl("CustomHighlight")
+		local expected = { fg = "#FFFFFF" }
 		assert.are.same(expected, user_group)
-	end)
-
-	test("plugins", function()
-		local treesitter = nvim_get_hl("@variable")
-		assert.True(colors.base0 == treesitter.fg)
 	end)
 end)`
 }
