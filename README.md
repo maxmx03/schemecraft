@@ -53,6 +53,99 @@ schemecraft update vim scheme.json
 
 > output: current directory
 
+### Template YAML
+
+```yaml
+specification:
+  identifier: &identifier
+    fg: fg
+
+name: Solarized
+author: Max
+repo: https://github.com/maxmx03/solarized
+contact: ""
+config: # you keep this as default
+  transparent: false
+  on_colors: ~
+  on_highlights: ~
+  plugins: ~
+palette:
+  fg: "#FEECE2"
+  bg: "#374259"
+  comment: "#545B77"
+  blue: "#B5C0D0"
+highlights:
+  editor: # :h highlihts-groups
+    - name: Normal
+      fg: fg
+      bg: bg
+      transparent: true
+  syntax: # :h group-name
+    - name: Comment
+      fg: comment
+      italic: true
+      gui: italic,bold
+plugins:
+  nvim-treesitter:
+    - name: "@variable"
+      <<: *identifier
+    - name: "@variable.builtin"
+      link: Constant
+```
+
+### Template JSON
+
+```json
+{
+  "name": "Solarized",
+  "author": "Max",
+  "repo": "https://github.com/maxmx03/solarized",
+  "contact": "",
+  "config": {
+    "transparent": false,
+    "on_colors": null,
+    "on_highlights": null,
+    "plugins": null
+  },
+  "palette": {
+    "fg": "#FEECE2",
+    "bg": "#374259",
+    "comment": "#545B77",
+    "blue": "#B5C0D0"
+  },
+  "highlights": {
+    "editor": [
+      {
+        "name": "Normal",
+        "fg": "fg",
+        "bg": "bg",
+        "transparent": true
+      }
+    ],
+    "syntax": [
+      {
+        "name": "Comment",
+        "fg": "comment",
+        "italic": true,
+        "gui": "italic,bold"
+      }
+    ]
+  },
+  "plugins": {
+    "nvim-treesitter": [
+      {
+        "name": "@variable",
+        "fg": "fg"
+      },
+      {
+        "name": "@variable.builtin",
+        "link": "Constant"
+      }
+    ]
+  }
+}
+```
+
 ## Contributing
 
 Feel free to contribute to Schemecraft by opening issues or pull requests.
