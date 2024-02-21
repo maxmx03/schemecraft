@@ -42,7 +42,6 @@ end)`
 
 func SetupSpec() string {
 	return `local nvim_get_hl = require("{{mustRegexFind "^[a-z]+" .Name}}.utils").nvim_get_hl
-local colors = require("{{mustRegexFind "^[a-z]+" .Name}}.palette")
 
 describe("{{mustRegexFind "^[a-z]+" .Name}}.setup", function()
 	setup(function()
