@@ -31,6 +31,10 @@ func main() {
 			vim.Create(scheme)
 		}
 	case "update":
+		if len(os.Args) < 4 {
+			log.Fatalf(`Usage:
+      schemecraft update nvim colorscheme.json ... # to update your colorscheme`)
+		}
 		var argument = os.Args[2]
 		var arguments []string = os.Args[3:]
 
