@@ -134,7 +134,8 @@ func Create(scheme scheme.Scheme, mainTheme bool) {
 	log.Printf("%v.lua created successfully", scheme.GetName())
 }
 
-func Update(scheme scheme.Scheme, isMainTheme bool) {
+func Update(scheme scheme.Scheme, mainTheme bool) {
+	isMainTheme = mainTheme
 	var root string
 	setProject(scheme, root)
 	createProjectFiles(scheme)
