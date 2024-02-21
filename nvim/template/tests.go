@@ -1,25 +1,25 @@
 package template
 
 func LoadSpec() string {
-	return `local nvim_get_hl = require("{{mustRegexFind "^[a-z]+" .Name}}.utils").nvim_get_hl
+	return `local nvim_get_hl = require("{{.Name}}.utils").nvim_get_hl
 
 describe("{{.Name}}.load", function()
 	setup(function()
-		vim.cmd.colorscheme("{{mustRegexFind "^[a-z]+" .Name}}")
+		vim.cmd.colorscheme("{{.Name}}")
 	end)
 
 	test("name", function()
-		local expected = "{{mustRegexFind "^[a-z]+" .Name}}"
+		local expected = "{{.Name}}"
 		assert.equal(expected, vim.g.colors_name)
 	end)
 
 	test("palette", function()
-		local colors = require("{{mustRegexFind "^[a-z]+" .Name}}.palette")
+		local colors = require("{{.Name}}.palette")
 		assert.True(type(colors) == "table")
 	end)
 
   test("default config", function()
-		local config = require("{{mustRegexFind "^[a-z]+" .Name}}.config")
+		local config = require("{{.Name}}.config")
 		assert.True(type(config) == "table")
 	end)
 
@@ -41,11 +41,11 @@ end)`
 }
 
 func SetupSpec() string {
-	return `local nvim_get_hl = require("{{mustRegexFind "^[a-z]+" .Name}}.utils").nvim_get_hl
+	return `local nvim_get_hl = require("{{.Name}}.utils").nvim_get_hl
 
-describe("{{mustRegexFind "^[a-z]+" .Name}}.setup", function()
+describe("{{.Name}}.setup", function()
 	setup(function()
-		require("{{mustRegexFind "^[a-z]+" .Name}}").setup({
+		require("{{.Name}}").setup({
 			transparent = true,
 			on_colors = function()
 				return {
@@ -58,7 +58,7 @@ describe("{{mustRegexFind "^[a-z]+" .Name}}.setup", function()
 				}
 			end,
 		})
-		vim.cmd("colorscheme {{mustRegexFind "^[a-z]+" .Name}}")
+		vim.cmd("colorscheme {{.Name}}")
 	end)
 
 	test("transparent", function()

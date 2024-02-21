@@ -1,10 +1,10 @@
 package template
 
 func Config() string {
-	return `---@class {{mustRegexFind "^[a-z]+" .Name}}.config
+	return `---@class {{.Name}}.config
 ---@field transparent? boolean
----@field on_highlights? fun(colors: {{mustRegexFind "^[a-z]+" .Name}}.palette, color: table): {{mustRegexFind "^[a-z]+" .Name}}.highlights
----@field on_colors? fun(colors: {{mustRegexFind "^[a-z]+" .Name}}.palette, color: table): {{mustRegexFind "^[a-z]+" .Name}}.palette
+---@field on_highlights? fun(colors: {{.Name}}.palette, color: table): {{.Name}}.highlights
+---@field on_colors? fun(colors: {{.Name}}.palette, color: table): {{.Name}}.palette
 return {
   transparent = {{.Config.Transparent}},
   on_highlights = {{default "nil" .Config.OnHighlights}},
@@ -20,13 +20,13 @@ return {
 }
 
 func Root() string {
-	return `---@class {{mustRegexFind "^[a-z]+" .Name}}
----@field config {{mustRegexFind "^[a-z]+" .Name}}.config
----@field setup fun(config: {{mustRegexFind "^[a-z]+" .Name}}.config)
+	return `---@class {{.Name}}
+---@field config {{.Name}}.config
+---@field setup fun(config: {{.Name}}.config)
 ---@field load fun(theme: string)
 local M = {}
 
-M.config = require("{{mustRegexFind "^[a-z]+" .Name}}.config")
+M.config = require("{{.Name}}.config")
 
 M.setup = function(config)
 	M.config = vim.tbl_extend("force", M.config, config)
@@ -43,15 +43,15 @@ M.load = function(theme)
 	end
 
 	vim.g.colors_name = theme
-  local ok, highlights = pcall(require, "{{mustRegexFind "^[a-z]+" .Name}}.highlights." .. theme)
+  local ok, highlights = pcall(require, "{{.Name}}.highlights." .. theme)
   if not ok then
-    highlights = require("{{regexFind "^[a-z]+" .Name}}.highlights")
+    highlights = require("{{.Name}}.highlights")
   end
 
   local colors = {}
-  ok, colors = pcall(require, "{{mustRegexFind "^[a-z]+" .Name}}.palette" .. theme)
+  ok, colors = pcall(require, "{{.Name}}.palette" .. theme)
   if not ok then
-    colors = require("{{mustRegexFind "^[a-z]+" .Name}}.palette")
+    colors = require("{{.Name}}.palette")
   end
 
   highlights.set_highlight(colors, M.config)
@@ -87,7 +87,7 @@ return {
 }
 
 func Color() string {
-	return `---@class {{mustRegexFind "^[a-z]+" .Name}}.color
+	return `---@class {{.Name}}.color
 ---@field hex_to_rgb fun(hex: string): number, number, number
 ---@field rgb_to_hex fun(red: number, green: number, blue: number): string
 ---@field darken fun(hex: string, percentage: number): string

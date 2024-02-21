@@ -2,7 +2,7 @@
   "name": "dracula",
   "author": "Max Del Canto",
   "repo": "github.com/maxmx03/dracula.nvim",
-  "contact": "come to brazil",
+  "contact": "github.com/maxmx03",
   "license": "MIT License",
   "config": {
     "transparent": false,

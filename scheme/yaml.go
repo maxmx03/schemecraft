@@ -14,6 +14,7 @@ type HighlightsYaml struct {
 
 type SchemeYaml struct {
 	Name       string                 `yaml:"name"`
+	Version    string                 `yaml:"version"`
 	Author     string                 `yaml:"author"`
 	Repo       string                 `yaml:"repo"`
 	License    string                 `yaml:"license"`
@@ -25,6 +26,10 @@ type SchemeYaml struct {
 
 func (s SchemeYaml) GetName() string {
 	return s.Name
+}
+
+func (s SchemeYaml) GetVersion() string {
+	return s.Version
 }
 
 func (s SchemeYaml) GetAuthor() string {

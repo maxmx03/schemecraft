@@ -14,6 +14,7 @@ type HighlightsJson struct {
 
 type SchemeJson struct {
 	Name       string                 `json:"name"`
+	Version    string                 `json:"version"`
 	Author     string                 `json:"author"`
 	Repo       string                 `json:"repo"`
 	License    string                 `json:"license"`
@@ -25,6 +26,10 @@ type SchemeJson struct {
 
 func (s SchemeJson) GetName() string {
 	return s.Name
+}
+
+func (s SchemeJson) GetVersion() string {
+	return s.Version
 }
 
 func (s SchemeJson) GetAuthor() string {

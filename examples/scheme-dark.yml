@@ -1,5 +1,4 @@
-name: dracula # main theme
-version: NVIM v0.9.1
+name: dracula-dark # main theme
 author: Max Del Canto
 repo: github.com/maxmx03/dracula.nvim
 contact: github.com/maxmx03
@@ -14,8 +13,8 @@ config:
 palette:
   base0: "#f8f8f2" # foreground
   base01: "#6272a4" # comment
-  base02: "#21222c" # background highlight (currentline, fold)
-  base03: "#252a36" # background
+  base02: "#fafafa" # background highlight (currentline, fold)
+  base03: "#000000" # background
   # base04:
   # base05:
   # ... for darker background colors
@@ -47,6 +46,7 @@ highlights:
     - name: "Function"
       link: "Constant"
     - name: "Comment"
+      fg: base01
       bg: base03
     - name: "Constant"
       fg: purple # vim and neovim

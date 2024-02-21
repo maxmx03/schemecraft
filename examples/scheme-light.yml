@@ -1,7 +1,7 @@
 name: dracula-light # main theme
 author: Max Del Canto
 repo: github.com/maxmx03/dracula.nvim
-contact: come to brazil
+contact: github.com/maxmx03
 license: "MIT License"
 # You don't need to changes the values bellow
 config:

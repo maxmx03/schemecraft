@@ -14,6 +14,7 @@ type Highlights interface {
 
 type Scheme interface {
 	GetName() string
+	GetVersion() string
 	GetAuthor() string
 	GetRepo() string
 	GetLicense() string
