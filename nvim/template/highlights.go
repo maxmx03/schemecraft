@@ -3,16 +3,16 @@ package template
 func Highlights() string {
 	return `---@class {{mustRegexFind "^[a-z]+" .Name}}.highlights
 {{- range $index, $group := .Highlights.Editor}}
----@field {{$group.name}} table
+---@field {{$group.name}}? table
 {{- end}}
 {{- range $index, $group := .Highlights.Syntax}}
----@field {{$group.name}} table
+---@field {{$group.name}}? table
 {{- end}}
 {{- range $x, $groups := .Highlights.Plugins}}
 {{- range $y, $group_vals := $groups}}
 {{- range $z, $group := $group_vals}}
 {{- if not (hasPrefix "@" $group.name)}}
----@field {{$group.name}} table
+---@field {{$group.name}}? table
 {{- end}}
 {{- end}}
 {{- end}}

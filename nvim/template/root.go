@@ -68,7 +68,7 @@ return {
       require "{{.Name}}".setup({
       transparent = {{.Config.Transparent}},
       on_colors = function (colors, color)
-        ---@type {{.Name}}.colors
+        ---@type {{.Name}}.palette
         return {
           -- override or create new colors
           mycolor = "#ffffff",
