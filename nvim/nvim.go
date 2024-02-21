@@ -41,6 +41,7 @@ type projectStructure struct {
 	dockerfile string
 	compose    string
 	shell      string
+	readme     string
 }
 
 var project projectStructure
@@ -70,6 +71,7 @@ func setProject(scheme scheme.Scheme, root string) {
 		project.dockerfile = filepath.Join(root, "Dockerfile")
 		project.compose = filepath.Join(root, "docker-compose.yml")
 		project.shell = filepath.Join(root, "shell.nix")
+		project.readme = filepath.Join(root, "README.md")
 	} else {
 		project.lua.palette.file = filepath.Join(project.lua.palette.dir, scheme.GetName()+".lua")
 		project.lua.highlights.file = filepath.Join(project.lua.highlights.dir, scheme.GetName()+".lua")
@@ -105,6 +107,7 @@ func createProjectFiles(scheme scheme.Scheme) {
 	createFile(project.colors.file, scheme, template.Colors())
 
 	if isMainTheme {
+		createFile(project.readme, scheme, template.Readme())
 		createFile(project.compose, scheme, template.DockerCompose())
 		createFile(project.dockerfile, scheme, template.DockerFile())
 		createFile(project.shell, scheme, template.NixShell())
