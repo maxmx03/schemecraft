@@ -49,7 +49,7 @@ M.load = function(theme)
   end
 
   local colors = {}
-  ok, colors = pcall(require, "{{.Name}}.palette" .. theme)
+  ok, colors = pcall(require, "{{.Name}}.palette." .. theme)
   if not ok then
     colors = require("{{.Name}}.palette")
   end
