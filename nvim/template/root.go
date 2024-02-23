@@ -28,14 +28,17 @@ func DockerCompose() string {
 }
 
 func Readme() string {
-	var readme = `# {{.Name}}
+	var readme = `# {{title .Name}}
 
-Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
-labore culpa sint ad nisi Lorem pariatur.
+![schemecraft](https://github.com/maxmx03/schemecraft/assets/50273941/ee682aae-00cb-4282-ba24-3d9621a430a3)
 
 ## Installation
 
+Enable {{.Name}} annotations (optional)
+
 %v
+
+lazy.nvim
 
 %v
 
@@ -44,17 +47,33 @@ labore culpa sint ad nisi Lorem pariatur.
 %v
 `
 
-	var luarc = "```json"
-	luarc += `
-{
-  "workspace": {
-    "library": [
-      "~/.local/share/nvim/lazy/{{.Name}}"
-    ],
+	var lspconfig = "```lua"
+	lspconfig += `
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME,
+          '~/.local/share/nvim/lazy/{{.Name}}',
+        },
+      },
+      hint = {
+        enable = true,
+      },
+      completion = {
+        callSnippet = 'Replace',
+      },
+    },
   },
+  capabilities = capabilities,
 }
 `
-	luarc += "```"
+	lspconfig += "```"
 
 	var installBlockCode = "```lua"
 	installBlockCode += `
@@ -65,7 +84,9 @@ return {
     priority = 1000,
     config = function ()
       ---@type {{.Name}}
-      require "{{.Name}}".setup({
+      local {{mustRegexFind "^[a-z]+" .Name}} = require "{{.Name}}"
+
+      {{mustRegexFind "^[a-z]+" .Name}}.setup({
       transparent = {{.Config.Transparent}},
       on_colors = function (colors, color)
         ---@type {{.Name}}.palette
@@ -129,5 +150,5 @@ local new_color = blend(colors.yellow, colors.base03, 0.2)
 `
 	api += "```"
 
-	return fmt.Sprintf(readme, luarc, installBlockCode, api)
+	return fmt.Sprintf(readme, lspconfig, installBlockCode, api)
 }
