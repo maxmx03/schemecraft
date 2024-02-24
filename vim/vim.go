@@ -14,6 +14,7 @@ type projectStructure struct {
 		dir  string
 		file string
 	}
+	readme string
 }
 
 var project projectStructure
@@ -21,6 +22,7 @@ var project projectStructure
 func setProject(scheme scheme.Scheme, root string) {
 	project.colors.dir = filepath.Join(root, "colors")
 	project.colors.file = filepath.Join(project.colors.dir, scheme.GetName()+".vim")
+	project.readme = filepath.Join(root, "README.md")
 }
 
 func createProjectDirs() {
@@ -38,6 +40,7 @@ func createProjectDirs() {
 
 func createProjectFiles(scheme scheme.Scheme) {
 	createFile(project.colors.file, scheme, template.Colors())
+	createFile(project.readme, scheme, template.Readme())
 }
 
 func Create(scheme scheme.Scheme) {

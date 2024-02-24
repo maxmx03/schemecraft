@@ -34,15 +34,26 @@ func Readme() string {
 
 ## Installation
 
-Enable {{.Name}} annotations (optional)
+To install {{title .Name}}, you need a plugin manager. \
+In the example, bellow we are going to use lazy.nvim for neovim \
+and vim-plug for vim.
+
+### Neovim
+
+Annotations can be enabled. \
+Below is an example of how to enable them.
 
 %v
 
-lazy.nvim
+%v
+
+### Vim
 
 %v
 
 ## Api
+
+The {{title .Name}} provides methods for working with colors. Here are some examples:
 
 %v
 `
@@ -150,5 +161,12 @@ local new_color = blend(colors.yellow, colors.base03, 0.2)
 `
 	api += "```"
 
-	return fmt.Sprintf(readme, lspconfig, installBlockCode, api)
+	var vim = "```vim"
+	vim += `
+Plug '{{.Repo}}', { 'branch': 'vim' }
+colorscheme {{.Name}}
+`
+	vim += "```"
+
+	return fmt.Sprintf(readme, lspconfig, installBlockCode, vim, api)
 }

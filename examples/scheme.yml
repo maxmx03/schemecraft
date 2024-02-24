@@ -1,7 +1,7 @@
 name: dracula # main theme
 version: NVIM v0.9.1
 author: Max Del Canto
-repo: github.com/maxmx03/dracula.nvim
+repo: maxmx03/dracula.nvim
 contact: github.com/maxmx03
 license: "MIT License"
 # You don't need to changes the values bellow
