@@ -3,7 +3,7 @@ package template
 import "fmt"
 
 func Readme() string {
-	var readme = `# {{title .Name}}
+	var readme = `# {{title (mustRegexFind "^[a-z]+" .Name)}}
 
 ![schemecraft](https://github.com/maxmx03/schemecraft/assets/50273941/ee682aae-00cb-4282-ba24-3d9621a430a3)
 
