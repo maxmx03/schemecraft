@@ -146,6 +146,10 @@ plugins:
 }
 ```
 
+## Schemecraft Colorschemes
+
+- [dracula](https://github.com/maxmx03/dracula.nvim)
+
 ## Contributing
 
 Feel free to contribute to Schemecraft by opening issues or pull requests.
