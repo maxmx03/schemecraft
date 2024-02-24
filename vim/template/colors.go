@@ -27,7 +27,7 @@ g:{{mustRegexFind "^[a-z]+" .Name}} = {
 }
 {{range $index, $plugins := .Highlights.Plugins -}}
 {{range $pluginName, $pluginConfigs:= $plugins -}}
-g:{{mustRegexFind "^[a-z]+" $.Name}}.plugins["{{$pluginName}}"] = true,
+g:{{mustRegexFind "^[a-z]+" $.Name}}.plugins["{{$pluginName}}"] = false
 {{end -}}
 {{end -}}
 
@@ -51,7 +51,9 @@ hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} gu
   {{- if get $group "link"}}
 hi! link {{$group.name}} {{$group.link}}
   {{- else}}
+{{- if not (hasPrefix "@" $group.name)}}
 hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} guibg={{default "NONE" (get $.Palette (get $group "bg"))}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}
+{{- end -}}
 {{- end -}}
 {{- end -}}
 
@@ -59,11 +61,13 @@ hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} gu
   {{- range $y, $group_vals := $groups}}
 if g:{{$.Name}}.plugins["{{$y}}"]
   {{- range $z, $group := $group_vals}}
+  {{- if not (hasPrefix "@" $group.name)}}
   {{- if get $group "link"}}
   hi! link {{$group.name}} {{$group.link}}
   {{- else}}
   hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} guibg={{default "NONE" (get $.Palette (get $group "bg"))}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}
-{{- end -}}
+  {{- end -}}
+  {{- end -}}
 {{end}}
 endif
 {{end -}}
