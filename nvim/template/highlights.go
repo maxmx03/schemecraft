@@ -47,7 +47,7 @@ end
 M.set_highlight = function(colors, config)
 	if config.on_colors then
 		local color = require("{{mustRegexFind "^[a-z]+" .Name}}.color")
-		colors = vim.tbl_extend("force", colors, config.on_colors(colors))
+		colors = vim.tbl_extend("force", colors, config.on_colors(colors,color))
 	end
   -- EDITOR :h highlight-groups
   {{- range $index, $group := .Highlights.Editor -}}
