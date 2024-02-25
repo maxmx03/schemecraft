@@ -46,6 +46,7 @@ end
 
 M.set_highlight = function(colors, config)
 	if config.on_colors then
+		local color = require("{{mustRegexFind "^[a-z]+" .Name}}.color")
 		colors = vim.tbl_extend("force", colors, config.on_colors(colors))
 	end
   -- EDITOR :h highlight-groups
@@ -125,7 +126,7 @@ M.set_highlight = function(colors, config)
   {{end -}}
 
 	if config.on_highlights then
-		local color = require("{{.Name}}.color")
+		local color = require("{{mustRegexFind "^[a-z]+" .Name}}.color")
 		local highlights = config.on_highlights(colors, color)
 
 		for group_name, group_val in pairs(highlights) do
