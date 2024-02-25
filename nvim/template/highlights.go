@@ -124,9 +124,9 @@ M.set_highlight = function(colors, config)
   {{end -}}
   {{end -}}
 
-	if config.on_highlight then
+	if config.on_highlights then
 		local color = require("{{.Name}}.color")
-		local highlights = config.on_highlight(colors, color)
+		local highlights = config.on_highlights(colors, color)
 
 		for group_name, group_val in pairs(highlights) do
 			local hl = nvim_get_hl({ name = group_name, link = true })
