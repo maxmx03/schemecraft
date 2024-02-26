@@ -3,7 +3,7 @@ package template
 func Config() string {
 	return `---@class {{.Name}}.config
 ---@field transparent? boolean
----@field on_highlights? fun(colors: {{.Name}}.palette, color: table): {{.Name}}.highlights
+---@field on_highlights? fun(colors: {{.Name}}.palette, color: {{.Name}}.color): {{.Name}}.highlights
 ---@field on_colors? fun(colors: {{.Name}}.palette, color: {{.Name}}.color): {{.Name}}.palette
 return {
   transparent = {{.Config.Transparent}},
