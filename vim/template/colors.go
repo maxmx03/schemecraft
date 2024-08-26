@@ -63,7 +63,7 @@ hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} gu
 
 {{- range $x, $groups := .Highlights.Plugins}}
   {{- range $y, $group_vals := $groups}}
-if g:{{$.Name}}.plugins["{{$y}}"]
+if g:{{mustRegexFind "^[a-z]+" $.Name}}.plugins["{{$y}}"]
   {{- range $z, $group := $group_vals}}
   {{- if not (hasPrefix "@" $group.name)}}
   {{- if get $group "link"}}
