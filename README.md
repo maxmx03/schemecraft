@@ -14,12 +14,10 @@ create unique color schemes tailored to their preferences.
 
 ## Getting Started
 
-## Build
-
-To use Schemecraft, start by building the executable:
+## Installation
 
 ```bash
-go build
+go install github.com/maxmx03/schemecraft@latest
 ```
 
 ## Usage
