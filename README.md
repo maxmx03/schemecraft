@@ -40,8 +40,6 @@ schemecraft scheme.json
 schemecraft scheme.yml scheme-light.yml
 ```
 
-> output: current directory
-
 ### Template YAML
 
 ```yaml
@@ -55,8 +53,6 @@ repo: https://github.com/maxmx03/solarized
 contact: ""
 config: # you keep this as default
   transparent: false
-  on_colors: ~
-  on_highlights: ~
   plugins: ~
 palette:
   fg: "#FEECE2"
