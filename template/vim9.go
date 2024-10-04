@@ -27,7 +27,7 @@ Enable the plugins you want.
 `
 	var installBlockCode = "```vim"
 	installBlockCode += `
-Plug '{{.Repo}}', { 'branch': 'vim' }
+Plug '{{.Repo}}'
 
 colorscheme {{.Name}}
 `
