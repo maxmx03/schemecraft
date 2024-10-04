@@ -1,6 +1,48 @@
 package template
 
-func Colors() string {
+import "fmt"
+
+func Vim9Readme() string {
+	var readme = `# {{title (mustRegexFind "^[a-z]+" .Name)}}
+
+![schemecraft](https://github.com/maxmx03/schemecraft/assets/50273941/ee682aae-00cb-4282-ba24-3d9621a430a3)
+
+## Installation
+
+To install {{title .Name}}, you need a plugin manager. \
+In the example, bellow we are going to use vim-plug.
+
+%v
+
+## Plugins
+
+Bellow are the {{title .Name}} supported plugins. \
+Enable the plugins you want.
+
+%v
+`
+	var installBlockCode = "```vim"
+	installBlockCode += `
+Plug '{{.Repo}}', { 'branch': 'vim' }
+
+colorscheme {{.Name}}
+`
+	installBlockCode += "```"
+
+	var plugins = "```vim"
+	plugins += `
+{{range $index, $plugins := .Highlights.Plugins -}}
+{{range $pluginName, $pluginConfigs:= $plugins -}}
+g:{{mustRegexFind "^[a-z]+" $.Name}}_{{$pluginName}} = true
+{{end -}}
+{{end -}}
+`
+	plugins += "```"
+
+	return fmt.Sprintf(readme, installBlockCode, plugins)
+}
+
+func Vim9Colors() string {
 	return `vim9script
 
 # {{.Name}} Colorscheme for vim
@@ -22,12 +64,9 @@ endif
 
 set termguicolors
 g:colors_name = '{{.Name}}'
-g:{{mustRegexFind "^[a-z]+" .Name}} = {
-  plugins: {},
-}
 {{range $index, $plugins := .Highlights.Plugins -}}
 {{range $pluginName, $pluginConfigs:= $plugins -}}
-g:{{mustRegexFind "^[a-z]+" $.Name}}.plugins["{{$pluginName}}"] = false
+g:{{mustRegexFind "^[a-z]+" $.Name}}_{{$pluginName}} = get(g:, '{{mustRegexFind "^[a-z]+" $.Name}}_{{$pluginName}}', false)
 {{end -}}
 {{end -}}
 
@@ -63,7 +102,7 @@ hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} gu
 
 {{- range $x, $groups := .Highlights.Plugins}}
   {{- range $y, $group_vals := $groups}}
-if g:{{mustRegexFind "^[a-z]+" $.Name}}.plugins["{{$y}}"]
+if g:{{mustRegexFind "^[a-z]+" $.Name}}_{{$y}}
   {{- range $z, $group := $group_vals}}
   {{- if not (hasPrefix "@" $group.name)}}
   {{- if get $group "link"}}

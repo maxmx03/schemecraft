@@ -3,71 +3,33 @@ package main
 import (
 	"log"
 	"os"
-	"schemecraft/nvim"
-	"schemecraft/scheme"
-	"schemecraft/system"
-	"schemecraft/vim"
 	"strings"
+
+	"github.com/maxmx03/schemecraft/scheme"
+	"github.com/maxmx03/schemecraft/system"
+	vim "github.com/maxmx03/schemecraft/template"
 )
+
+const msg = `
+    Usage:
+    schemecraft colorscheme.json ... # to generate colorscheme
+`
 
 func main() {
 	if len(os.Args) < 2 {
-		log.Fatalf(`
-    Usage:
-    schemecraft create colorscheme.json ... # to generate colorscheme
-    `)
+		log.Fatalf(msg)
 	}
 
-	var argument = os.Args[1]
-
-	switch argument {
-	case "create":
-		var arguments []string = os.Args[2:]
-
-		for index, arg := range arguments {
-			var scheme scheme.Scheme = ReadFile(arg)
-			var isMainTheme bool = index == 0
-			nvim.Create(scheme, isMainTheme)
-			vim.Create(scheme)
-		}
-	case "update":
-		if len(os.Args) < 4 {
-			log.Fatalf(`Usage:
-      schemecraft update nvim colorscheme.json ... # to update your colorscheme`)
-		}
-		var argument = os.Args[2]
-		var arguments []string = os.Args[3:]
-
-		for index, arg := range arguments {
-			var scheme scheme.Scheme = ReadFile(arg)
-			var isMainTheme bool = index == 0
-
-			if argument == "nvim" {
-				nvim.Update(scheme, isMainTheme)
-			} else if argument == "vim" {
-				vim.Update(scheme)
-			} else {
-				log.Fatalf("Invalid Argument %v\nUsage: schemecraft update nvim colorscheme.json", argument)
-				break
-			}
-		}
-	default:
-		log.Fatalf("Invalid Argument %v\nUsage: schemecraft create colorscheme.json", argument)
+	for _, arg := range os.Args[1:] {
+		var scheme scheme.Scheme = ReadFile(arg)
+		vim.Create(scheme)
 	}
-}
-
-func isYaml(value string) bool {
-	return strings.HasSuffix(value, "yml") || strings.HasSuffix(value, "yaml")
 }
 
 func ReadFile(file string) scheme.Scheme {
 	var scheme scheme.Scheme
-
-	if isYaml(file) {
+	if strings.HasSuffix(file, "yml") || strings.HasSuffix(file, "yaml") {
 		scheme = system.ReadYaml(file)
-	} else {
-		scheme = system.ReadJson(file)
 	}
-
 	return scheme
 }

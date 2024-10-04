@@ -1,13 +1,13 @@
 package system
 
 import (
-	"encoding/json"
-	"github.com/Masterminds/sprig/v3"
-	"gopkg.in/yaml.v3"
 	"log"
 	"os"
-	"schemecraft/scheme"
 	"text/template"
+
+	"github.com/Masterminds/sprig/v3"
+	"github.com/maxmx03/schemecraft/scheme"
+	"gopkg.in/yaml.v3"
 )
 
 func CreateDir(directory string) error {
@@ -23,7 +23,7 @@ func WriteTemplateFile(filePath string, scheme scheme.Scheme, schemeTemplate str
 
 	defer file.Close()
 
-	var tmpl = template.Must(template.New(scheme.GetName()).Funcs(sprig.FuncMap()).Parse(schemeTemplate))
+	var tmpl = template.Must(template.New(scheme.Name).Funcs(sprig.FuncMap()).Parse(schemeTemplate))
 	err = tmpl.Execute(file, scheme)
 
 	if err != nil {
@@ -33,23 +33,12 @@ func WriteTemplateFile(filePath string, scheme scheme.Scheme, schemeTemplate str
 	return nil
 }
 
-func ReadYaml(filename string) scheme.SchemeYaml {
-	var scheme scheme.SchemeYaml
+func ReadYaml(filename string) scheme.Scheme {
+	var scheme scheme.Scheme
 	var yamlFile, err = os.ReadFile(filename)
 
 	LogFatal("Couldn't read yaml file: ", err)
 	err = yaml.Unmarshal([]byte(yamlFile), &scheme)
-	LogFatal("Couldn't unmarshal", err)
-
-	return scheme
-}
-
-func ReadJson(filename string) scheme.SchemeJson {
-	var scheme scheme.SchemeJson
-	var jsonFile, err = os.ReadFile(filename)
-
-	LogFatal("Couldn't read yaml file: ", err)
-	err = json.Unmarshal([]byte(jsonFile), &scheme)
 	LogFatal("Couldn't unmarshal", err)
 
 	return scheme
@@ -60,3 +49,4 @@ func LogFatal(msg string, err error) {
 		log.Fatalf("%v %v", msg, err)
 	}
 }
+
