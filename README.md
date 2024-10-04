@@ -8,7 +8,7 @@
 
 </div>
 
-Schemecraft is a versatile colorscheme generator designed for Neovim and Vim9.
+Schemecraft is a versatile colorscheme generator designed for Neovim and Vim.
 It provides support for multiple variants, allowing users to customize and
 create unique color schemes tailored to their preferences.
 
@@ -24,14 +24,14 @@ go build
 
 ## Usage
 
-Generate a colorscheme by providing a base JSON file (or YAML)
+Generate a colorscheme by providing a base Yaml file
 
 ### Create
 
 #### example 1
 
 ```bash
-schemecraft create scheme.json
+schemecraft scheme.json
 ```
 
 > output: `build/`
@@ -39,16 +39,7 @@ schemecraft create scheme.json
 #### example 2
 
 ```bash
-schemecraft create scheme.yml scheme-light.yml
-```
-
-### Update
-
-Update your colorscheme
-
-```bash
-schemecraft update nvim scheme.json
-schemecraft update vim scheme.json
+schemecraft scheme.yml scheme-light.yml
 ```
 
 > output: current directory
@@ -86,64 +77,11 @@ highlights:
       italic: true
       gui: italic,bold
 plugins:
-  nvim-treesitter:
+  treesitter:
     - name: "@variable"
       <<: *identifier
     - name: "@variable.builtin"
       link: Constant
-```
-
-### Template JSON
-
-```json
-{
-  "name": "Solarized",
-  "author": "Max",
-  "repo": "https://github.com/maxmx03/solarized",
-  "contact": "",
-  "config": {
-    "transparent": false,
-    "on_colors": null,
-    "on_highlights": null,
-    "plugins": null
-  },
-  "palette": {
-    "fg": "#FEECE2",
-    "bg": "#374259",
-    "comment": "#545B77",
-    "blue": "#B5C0D0"
-  },
-  "highlights": {
-    "editor": [
-      {
-        "name": "Normal",
-        "fg": "fg",
-        "bg": "bg",
-        "transparent": true
-      }
-    ],
-    "syntax": [
-      {
-        "name": "Comment",
-        "fg": "comment",
-        "italic": true,
-        "gui": "italic,bold"
-      }
-    ]
-  },
-  "plugins": {
-    "nvim-treesitter": [
-      {
-        "name": "@variable",
-        "fg": "fg"
-      },
-      {
-        "name": "@variable.builtin",
-        "link": "Constant"
-      }
-    ]
-  }
-}
 ```
 
 ## Schemecraft Colorschemes
