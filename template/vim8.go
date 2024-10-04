@@ -9,21 +9,25 @@ func Vim8Readme() string {
 
 ## Installation
 
-To install {{title .Name}}, you need a plugin manager. \
+To install {{title .Name}}, you need a plugin manager.
 In the example, bellow we are going to use vim-plug.
 
 %v
 
+## Transparency
+
+let g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency = 0
+
 ## Plugins
 
-Bellow are the {{title .Name}} supported plugins. \
+Bellow are the {{title .Name}} supported plugins.
 Enable the plugins you want.
 
 %v
 `
 	var installBlockCode = "```vim"
 	installBlockCode += `
-Plug '{{.Repo}}', { 'branch': 'vim' }
+Plug '{{.Repo}}'
 
 colorscheme {{.Name}}
 `
@@ -63,6 +67,7 @@ endif
 
 set termguicolors
 let g:colors_name = '{{.Name}}'
+let g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency = 0
 
 {{range $index, $plugins := .Highlights.Plugins -}}
 {{range $pluginName, $pluginConfigs:= $plugins -}}
@@ -82,11 +87,17 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   \]
 endif
 
+{{ $transparent_groups := list "Normal" "NormalFloat" "Pmenu" }}
 {{range $index, $group := .Highlights.Editor}}
   {{- if get $group "link"}}
 hi! link {{$group.name}} {{$group.link}}
   {{- else}}
 hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} guibg={{default "NONE" (get $.Palette (get $group "bg"))}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}
+    {{- if has $group.name $transparent_groups }}
+if g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency == 0
+  hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} guibg={{"NONE"}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}
+endif
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
