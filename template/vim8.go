@@ -67,7 +67,7 @@ endif
 
 set termguicolors
 let g:colors_name = '{{.Name}}'
-let g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency = 0
+let g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency = get(g:, '{{mustRegexFind "^[a-z]+" $.Name}}_transparency', 0)
 
 {{range $index, $plugins := .Highlights.Plugins -}}
 {{range $pluginName, $pluginConfigs:= $plugins -}}
@@ -94,7 +94,7 @@ hi! link {{$group.name}} {{$group.link}}
   {{- else}}
 hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} guibg={{default "NONE" (get $.Palette (get $group "bg"))}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}
     {{- if has $group.name $transparent_groups }}
-if g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency == 0
+if g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency == 1
   hi {{$group.name}} guifg={{default "NONE" (get $.Palette (get $group "fg"))}} guibg={{"NONE"}} gui={{default "NONE" $group.gui}} cterm={{default "NONE" $group.gui}}
 endif
     {{- end -}}

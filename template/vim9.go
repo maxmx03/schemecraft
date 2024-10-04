@@ -68,7 +68,7 @@ endif
 
 set termguicolors
 g:colors_name = '{{.Name}}'
-g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency = true
+g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency = get(g:, '{{mustRegexFind "^[a-z]+" $.Name}}_transparency', false)
 
 {{range $index, $plugins := .Highlights.Plugins -}}
 {{range $pluginName, $pluginConfigs:= $plugins -}}
