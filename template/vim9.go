@@ -12,11 +12,11 @@ func Vim9Readme() string {
 To install {{title .Name}}, you need a plugin manager.
 In the example, bellow we are going to use vim-plug.
 
+%v
+
 ## Transparency
 
 g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency = true
-
-%v
 
 ## Plugins
 
