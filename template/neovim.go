@@ -37,7 +37,7 @@ colorscheme {{.Name}}
 	plugins += `
 {{range $index, $plugins := .Highlights.Plugins -}}
 {{range $pluginName, $pluginConfigs:= $plugins -}}
-let g:{{mustRegexFind "^[a-z]+" $.Name}}_{{$pluginName}} = 1
+vim.g.{{mustRegexFind "^[a-z]+" $.Name}}_{{$pluginName}} = true
 {{end -}}
 {{end -}}
 `
