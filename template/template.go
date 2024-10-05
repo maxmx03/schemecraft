@@ -16,27 +16,33 @@ type ProjectStructure struct {
 	readme string
 }
 
-func NewProject(colorscheme, filename string) ProjectStructure {
+func NewProject(colorscheme, file string) ProjectStructure {
 	var project ProjectStructure
 	var root string = "build"
 	root = filepath.Join(root, colorscheme)
 	project.colors.dir = filepath.Join(root, "colors")
-	project.colors.file = filepath.Join(project.colors.dir, filename+".vim")
+	project.colors.file = filepath.Join(project.colors.dir, file)
 	project.readme = filepath.Join(root, "README.md")
 	return project
 }
 
 func Create(scheme scheme.Scheme) {
 	var colorscheme = strings.Split(scheme.Name, "-")[0]
-	var vim8 = NewProject(colorscheme+"vim8", scheme.Name)
+
+	vim8 := NewProject(colorscheme+"vim8", scheme.Name+".vim")
 	createProjectDirs(vim8)
 	createFile(vim8.colors.file, scheme, Vim8Colors())
 	createFile(vim8.readme, scheme, Vim8Readme())
 
-	var vim9 = NewProject(colorscheme+"vim9", scheme.Name)
+	vim9 := NewProject(colorscheme+"vim9", scheme.Name+".vim")
 	createProjectDirs(vim9)
 	createFile(vim9.colors.file, scheme, Vim9Colors())
 	createFile(vim9.readme, scheme, Vim9Readme())
+
+	lua := NewProject(colorscheme+"lua", scheme.Name+".lua")
+	createProjectDirs(lua)
+	createFile(lua.colors.file, scheme, LuaColors())
+	createFile(lua.readme, scheme, LuaReadme())
 
 	log.Printf("%v.vim created successfully", scheme.Name)
 }

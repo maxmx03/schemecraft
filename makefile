@@ -2,4 +2,4 @@ clean:
 	rm -rf ./build
 build: clean
 	go build .
-	./schemecraft solarized.yml solarized-light.yml
+	./schemecraft dracula.yml dracula-soft.yml

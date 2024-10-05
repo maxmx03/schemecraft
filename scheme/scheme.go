@@ -1,9 +1,7 @@
 package scheme
 
 type Config struct {
-	Transparent  bool   `yaml:"transparent"`
-	OnHighlights string `yaml:"on_highlights"`
-	OnColors     string `yaml:"on_colors"`
+	Transparent bool `yaml:"transparent"`
 }
 
 type Highlights struct {

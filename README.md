@@ -2,8 +2,8 @@
 
 <div align="center"> 
     
-![Neovim](https://img.shields.io/badge/Neovim-v0.9.1+-blue?NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
-![Vim](https://img.shields.io/badge/Vim-9-blue?NeoVim-%2357A143.svg?&style=for-the-badge&logo=vim&logoColor=white)
+![Neovim](https://img.shields.io/badge/Neovim-v0.10.1+-blue?NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
+![Vim](https://img.shields.io/badge/Vim-green?NeoVim-%2357A143.svg?&style=for-the-badge&logo=vim&logoColor=white)
 ![LICENSE](https://shields.io/badge/LICENSE-MIT-orange?style=for-the-badge)
 
 </div>

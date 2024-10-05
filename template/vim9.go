@@ -127,5 +127,12 @@ if g:{{mustRegexFind "^[a-z]+" $.Name}}_{{$y}}
 {{end}}
 endif
 {{end -}}
+{{end -}}
+
+unlet g:{{mustRegexFind "^[a-z]+" $.Name}}_transparency
+{{range $index, $plugins := .Highlights.Plugins -}}
+{{range $pluginName, $pluginConfigs:= $plugins -}}
+unlet g:{{mustRegexFind "^[a-z]+" $.Name}}_{{$pluginName}}
+{{end -}}
 {{end -}}`
 }
