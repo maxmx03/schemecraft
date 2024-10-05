@@ -42,6 +42,9 @@ schemecraft scheme.yml scheme-light.yml
 
 ### Template YAML
 
+Check the example folder for a reference.
+
+
 ```yaml
 specification:
   identifier: &identifier
