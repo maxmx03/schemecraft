@@ -78,7 +78,7 @@ let g:{{mustRegexFind "^[a-z]+" $.Name}}_{{$pluginName}} = get(g:, '{{mustRegexF
 {{ $counter := 0 }}
 if (has('termguicolors') && &termguicolors) || has('gui_running')
   let g:terminal_ansi_colors = [
-    {{ range $index, $color := .Palette -}}
+    {{ range $index, $color := .TermColors -}}
     {{if lt $counter 16 -}}
     \ "{{ upper $color }}",
     {{ $counter = add $counter 1 }}

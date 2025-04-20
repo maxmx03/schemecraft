@@ -79,7 +79,7 @@ vim.g.{{mustRegexFind "^[a-z]+" $.Name}}_{{$pluginName}} = vim.g.{{mustRegexFind
 vim.cmd [[
 if (has('termguicolors') && &termguicolors) || has('gui_running')
   let g:terminal_ansi_colors = [
-    {{ range $index, $color := .Palette -}}
+    {{ range $index, $color := .TermColors -}}
     {{if lt $counter 16 -}}
     \ "{{ upper $color }}",
     {{ $counter = add $counter 1 }}
