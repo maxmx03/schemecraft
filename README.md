@@ -44,7 +44,6 @@ schemecraft scheme.yml scheme-light.yml
 
 Check the example folder for a reference.
 
-
 ```yaml
 specification:
   identifier: &identifier
@@ -84,6 +83,7 @@ plugins:
 ## Schemecraft Colorschemes
 
 - [dracula](https://github.com/maxmx03/dracula.nvim)
+- [retrolegends](https://github.com/maxmx03/retrolegends.nvim)
 
 ## Contributing
 
