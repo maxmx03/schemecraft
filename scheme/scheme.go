@@ -19,5 +19,6 @@ type Scheme struct {
 	Contact    string         `yaml:"contact"`
 	Config     Config         `yaml:"config"`
 	Palette    map[string]any `yaml:"palette"`
+	TermColors map[string]any `yaml:"terminal"`
 	Highlights Highlights     `yaml:"highlights"`
 }

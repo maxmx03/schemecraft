@@ -44,42 +44,6 @@ schemecraft scheme.yml scheme-light.yml
 
 Check the example folder for a reference.
 
-```yaml
-specification:
-  identifier: &identifier
-    fg: fg
-
-name: Solarized
-author: Max
-repo: https://github.com/maxmx03/solarized
-contact: ""
-config: # you keep this as default
-  transparent: false
-  plugins: ~
-palette:
-  fg: "#FEECE2"
-  bg: "#374259"
-  comment: "#545B77"
-  blue: "#B5C0D0"
-highlights:
-  editor: # :h highlihts-groups
-    - name: Normal
-      fg: fg
-      bg: bg
-      transparent: true
-  syntax: # :h group-name
-    - name: Comment
-      fg: comment
-      italic: true
-      gui: italic,bold
-plugins:
-  treesitter:
-    - name: "@variable"
-      <<: *identifier
-    - name: "@variable.builtin"
-      link: Constant
-```
-
 ## Schemecraft Colorschemes
 
 - [dracula](https://github.com/maxmx03/dracula.nvim)

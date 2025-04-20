@@ -5,6 +5,23 @@ contact: "github.com/maxmx03"
 license: "MIT License"
 config:
   transparent: false
+terminal: # 16 colors
+  1: '#1c1c1c'
+  2: '#dadada'
+  3: '#ffd933'
+  4: '#59ff59'
+  5: '#4c80ff'
+  6: '#e666ff'
+  7: '#dadada'
+  8: '#dadada'
+  9: '#707070'
+  10: '#dadada'
+  11: '#ffd933'
+  12: '#59ff59'
+  13: '#4c80ff'
+  14: '#e666ff'
+  15: '#dadada'
+  16: '#40d9e6'
 palette:
   yellow: '#ffdd33'
   cyan: '#00afaf'
